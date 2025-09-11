@@ -6,25 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fields.forEach(field => {
     const button = field.querySelector('button')
-    const input = field.querySelector('.nameInput')
-    const checkbox = field.querySelector('.checkbox')
+    const input = field.querySelector('input, textarea, select')
     const result = field.querySelector('.result')
-    const checkboxResult = field.querySelector('.checkboxResult')
 
     button.addEventListener('click', () => {
-      if (checkbox && checkbox.type === 'checkbox') {
-        const validation = validator.checkBoxChecker(checkbox)
-        checkboxResult.textContent = validation.message
-        return
-      }
-
-      if (input && input.type === 'text') {
-        const validation = validator.isNotEmpty(input.value)
+      if (!input) return
+      const validation = validator.validate(input)
+      if (input) {
         result.textContent = validation.message
-        return
-      }
-      if (input.type === 'radio') {
-        console.log('RADIO!')
       }
     })
   })
