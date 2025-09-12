@@ -9,12 +9,17 @@
     "build": "vite build",
     "serve": "vite preview",
     "lint": "npx eslint ./src || exit 0",
-    "lint:fix": "npx eslint ./src --fix || exit 0"
+    "lint:fix": "npx eslint ./src --fix || exit 0",
+    "backend": "node src/server.js"
   },
   "license": "MIT",
   "private": true,
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.10",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   }
 }

@@ -13,7 +13,6 @@ export class FormValidator {
       }
     }
     console.log(element)
-    console.log(element.type)
 
     if (
       ['text', 'email', 'number', 'search', 'tel', 'url', 'password', 'time']
@@ -65,6 +64,24 @@ export class FormValidator {
     return {
       valid,
       message: valid ? '✅ Radiobutton is selected' : '❌ Radiobutton is not selected'
+    }
+  }
+
+  /**
+   *
+   * @param data
+   */
+  async ping (url) {
+    const startTime = Date.now()
+    try {
+      const request = await fetch(url, { method: 'HEAD' })
+      if (!request.ok) {
+        throw new Error('Ping failed', request.statusText)
+      }
+      const endTime = Date.now() - startTime
+      console.log(`Server responded in ${endTime} ms`)
+    } catch (err) {
+      throw new Error(err.message)
     }
   }
 }
