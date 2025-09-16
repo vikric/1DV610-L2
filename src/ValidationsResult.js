@@ -1,5 +1,5 @@
-import { FormValidator } from './FormValidator.js'
-const validator = new FormValidator()
+import { Validator } from './validators/index.js'
+const validator = new Validator()
 
 document.addEventListener('DOMContentLoaded', () => {
   const fields = document.querySelectorAll('.field')
@@ -11,32 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', async () => {
       if (!input) return
-      const validation = validator.validate(input)
+      const validation = validator.validateInput(input)
       if (input) {
         result.textContent = validation.message
-        validator.ping('www.aftonbladet.org')
-        
-      try {
-        const request = await fetch('http://localhost:64574/data', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              email: 'kalle@homail.se'
-            })
-        })
-        const text = await request.text()
-        /* console.log(text) */
-        if (!request.ok) {
-          throw new Error('Ping domain failed', text)
-        }
-
-      } catch (err) {
-        throw new Error(err.message)
-      }
-    }
-
-      
+        console.log(validator.checkEmail(input.value))
+        /*         if (input.type === 'number') { */
+        console.log(validator.validateNumber('(Test)072-   1501501  ').message)
+        /*         }
+ */ }
     })
   })
 })

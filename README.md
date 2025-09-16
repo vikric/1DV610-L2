@@ -4,8 +4,9 @@
 ## Todo
 
 PhoneNumber
+Email
 Date-format
 Passwords
-Email
+
 PersonalNumber
 userNames
