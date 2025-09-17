@@ -3,13 +3,18 @@
  */
 export class FormValidator {
   /**
+   *
+   * @param htmlElement
+   */
+
+  /**
    * Validates the input element based on its type and value.
    *
-   * @param {HTMLInputElement} element - The input element to validate.
+   * @param {HTMLInputElement} htmlElement - The input element to validate.
    * @returns {{valid: boolean, message: string}} The validation result object.
    */
-  validate (element) {
-    if (!element) {
+  validate (htmlElement) {
+    if (!htmlElement) {
       return {
         valid: false, message: 'No element was found'
       }
@@ -17,16 +22,16 @@ export class FormValidator {
 
     if (
       ['text', 'email', 'number', 'search', 'tel', 'url', 'password', 'time']
-        .includes(element.type)) {
-      return this.#isNotEmpty(element.value)
+        .includes(htmlElement.type)) {
+      return this.#isNotEmpty(htmlElement.value)
     }
 
-    if (element.type === 'checkbox') {
-      return this.#checkBoxChecker(element)
+    if (htmlElement.type === 'checkbox') {
+      return this.#checkBoxChecker(htmlElement)
     }
 
-    if (element.type === 'radio') {
-      return this.#radioChecker(element)
+    if (htmlElement.type === 'radio') {
+      return this.#radioChecker(htmlElement)
     }
     return {
       valid: false, message: 'No supported element was found'

@@ -8,11 +8,13 @@ import { PhoneNrValidator } from './phoneNrValidator/phoneNrValidator.js'
 export class Validator {
   /**
    * Initializes the Validator with form, email, and phone number validators.
+   *
+   * @param element
    */
-  constructor () {
+  constructor (element) {
     this.formValidator = new FormValidator()
     this.emailValidator = new EmailValidator()
-    this.phoneNrValidator = new PhoneNrValidator()
+    this.phoneNrValidator = new PhoneNrValidator(element)
   }
 
   /**
@@ -22,7 +24,20 @@ export class Validator {
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
   validateInput (input) {
-    return this.formValidator.validate(input)
+    const validation = this.formValidator.validate(input)
+
+    if (!validation) {
+      return false
+    }
+
+    if (input.type === 'email') {
+      this.validateEmail(input.value)
+    }
+
+    if (input.type === 'number') {
+      return this.validateNumber(input)
+    }
+    return validation
   }
 
   /**
@@ -31,7 +46,7 @@ export class Validator {
    * @param {string} email - The email address to validate.
    * @returns {boolean} Returns true if the email is valid, otherwise false.
    */
-  checkEmail (email) {
+  validateEmail (email) {
     return this.emailValidator.validateEmail(email)
   }
 
