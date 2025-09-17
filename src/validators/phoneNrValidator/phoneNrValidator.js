@@ -1,12 +1,15 @@
+import { CreateResult } from '../createResult/createResult'
 /**
  *
  */
-export class PhoneNrValidator {
+export class PhoneNrValidator extends CreateResult {
   /**
+   * Creates an instance of PhoneNrValidator.
    *
-   * @param htmlElement
+   * @param {HTMLElement} htmlElement - The HTML element containing the number input.
    */
   constructor (htmlElement) {
+    super()
     this.htmlElement = htmlElement
   }
 
@@ -17,7 +20,7 @@ export class PhoneNrValidator {
    */
   validatePhoneNumber () {
     if (this.htmlElement.value <= 0) {
-      return this.returnMessage('No number entered', false)
+      return this.createResult(false, 'No number entered')
     }
     const re = /\d/g
     const digits = this.htmlElement.value.match(re).join('')
@@ -38,15 +41,6 @@ export class PhoneNrValidator {
       message = 'Valid length of phone number '
       valid = true
     }
-    return this.returnMessage(message, valid)
-  }
-
-  /**
-   *
-   * @param message
-   * @param valid
-   */
-  returnMessage (message, valid) {
-    return { valid, message }
+    return this.createResult(message, valid)
   }
 }

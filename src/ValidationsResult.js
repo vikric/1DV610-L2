@@ -11,17 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', async () => {
       if (!input) return
-      /* const validation = validator.validateInput(input) */
-
+      const validation = validator.validateInput(input)
       if (input) {
-        const email = validator.validateEmail()
-        if (input.type === 'number') {
-          console.log(validator.validateNumber())
-        } else {
-          /* console.log(validation) */
-        }
-        result.textContent = email.message
+        /*        if (input.type === 'email') {
+          validation = validator.validateEmail()
+        } else if (input.type === 'number') {
+          validation = validator.validateNumber()
+        } */
       }
+      result.textContent = validation.message
     })
   })
 })

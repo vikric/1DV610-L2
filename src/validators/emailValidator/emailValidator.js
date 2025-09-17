@@ -4,8 +4,9 @@ import { CreateResult } from '../createResult/createResult'
  */
 export class EmailValidator extends CreateResult {
   /**
+   * Creates an instance of EmailValidator.
    *
-   * @param htmlElement
+   * @param {HTMLElement} htmlElement - The HTML element containing the email input.
    */
   constructor (htmlElement) {
     super()

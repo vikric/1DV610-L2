@@ -24,7 +24,22 @@ export class Validator {
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
   validateInput (input) {
-    return this.formValidator.validate(input)
+    console.log(input.type)
+    switch (input.type) {
+      case 'text':
+      case 'search':
+      case 'password':
+      case 'time':
+      case 'url':
+        return this.formValidator.isNotEmpty()
+
+      case 'email':
+        return this.validateEmail()
+
+      case 'number':
+      case 'tel':
+        return this.validateNumber()
+    }
   }
 
   /**
@@ -33,8 +48,8 @@ export class Validator {
    * @param {string} email - The email address to validate.
    * @returns {boolean} Returns true if the email is valid, otherwise false.
    */
-  validateEmail (email) {
-    return this.emailValidator.validateEmail(email)
+  validateEmail () {
+    return this.emailValidator.validateEmail()
   }
 
   /**

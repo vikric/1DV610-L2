@@ -1,52 +1,28 @@
+import { CreateResult } from '../createResult/createResult'
 /**
  *
  */
-export class FormValidator {
+export class FormValidator extends CreateResult {
   /**
+   * Creates an instance of FormValidator.
    *
-   * @param htmlElement
+   * @param {HTMLElement} htmlElement - The HTML element containing the input.
    */
-  
-
-  /**
-   * Validates the input element based on its type and value.
-   *
-   * @param {HTMLInputElement} htmlElement - The input element to validate.
-   * @returns {{valid: boolean, message: string}} The validation result object.
-   */
-  validate (htmlElement) {
-    if (!htmlElement) {
-      return {
-        valid: false, message: 'No element was found'
-      }
-    }
-
-    if (
-      ['text', 'email', 'number', 'search', 'tel', 'url', 'password', 'time']
-        .includes(htmlElement.type)) {
-      return this.isNotEmpty(htmlElement.value)
-    }
-
-    if (htmlElement.type === 'checkbox') {
-      return this.#checkBoxChecker(htmlElement)
-    }
-
-    if (htmlElement.type === 'radio') {
-      return this.#radioChecker(htmlElement)
-    }
-    return {
-      valid: false, message: 'No supported element was found'
-    }
+  constructor (htmlElement) {
+    super()
+    this.htmlElement = htmlElement
   }
 
   /**
    * Checks if the provided input value is not empty.
    *
-   * @param {string} element - The value of the input element to check.
    * @returns {{valid: boolean, message: string}} The validation result object.
    */
-  isNotEmpty (element) {
-    const valid = element != null && element.trim().length > 0
+  isNotEmpty () {
+    if (!this.htmlElement) {
+      return { valid: false, message: '❌ Input is empty' }
+    }
+    const valid = this.htmlElement != null && this.htmlElement.value.trim().length > 0
     return {
       valid,
       message: valid ? '✅ Input is not empty' : '❌ Input is empty'
