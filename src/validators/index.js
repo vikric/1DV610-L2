@@ -12,8 +12,8 @@ export class Validator {
    * @param element
    */
   constructor (element) {
-    this.formValidator = new FormValidator()
-    this.emailValidator = new EmailValidator()
+    this.formValidator = new FormValidator(element)
+    this.emailValidator = new EmailValidator(element)
     this.phoneNrValidator = new PhoneNrValidator(element)
   }
 
@@ -24,20 +24,7 @@ export class Validator {
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
   validateInput (input) {
-    const validation = this.formValidator.validate(input)
-
-    if (!validation) {
-      return false
-    }
-
-    if (input.type === 'email') {
-      this.validateEmail(input.value)
-    }
-
-    if (input.type === 'number') {
-      return this.validateNumber(input)
-    }
-    return validation
+    return this.formValidator.validate(input)
   }
 
   /**
@@ -56,7 +43,23 @@ export class Validator {
    * @param {string} number - The phone number to validate.
    * @returns {boolean} Returns true if the phone number is valid, otherwise false.
    */
-  validateNumber (number) {
-    return this.phoneNrValidator.validateNumber(number)
+  validateNumber () {
+    return this.phoneNrValidator.validatePhoneNumber()
+  }
+
+  /**
+   *
+   * @param element
+   */
+  validateCheckbox (element) {
+    return this.formValidator.checkBoxChecker(element)
+  }
+
+  /**
+   *
+   * @param element
+   */
+  validateRadio (element) {
+    return this.formValidator.radiochecker(element)
   }
 }

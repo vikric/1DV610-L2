@@ -1,17 +1,31 @@
+import { CreateResult } from '../createResult/createResult'
 /**
  *
  */
-export class EmailValidator {
+export class EmailValidator extends CreateResult {
+  /**
+   *
+   * @param htmlElement
+   */
+  constructor (htmlElement) {
+    super()
+    this.htmlElement = htmlElement
+  }
+
   /**
    * Validates whether the provided email address is in a valid format.
    *
    * @param {string} email - The email address to validate.
    * @returns {string} 'Valid email' if the email is valid, otherwise 'Not valid email'.
    */
-  validateEmail (email) {
+  validateEmail () {
+    if (!this.htmlElement) {
+      return this.createResult(false, 'Enter an emailaddress')
+    }
     // https://www.geeksforgeeks.org/javascript/how-to-validate-email-address-using-regexp-in-javascript/
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    const valid = regex.test((email))
-    return valid ? 'Valid email' : 'Not valid email'
+    const valid = regex.test((this.htmlElement.value))
+    console.log(valid)
+    return this.createResult(valid, valid ? 'Valid emailaddress' : 'Invalid emailaddress')
   }
 }

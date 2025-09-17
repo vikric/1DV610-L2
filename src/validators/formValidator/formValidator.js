@@ -6,6 +6,7 @@ export class FormValidator {
    *
    * @param htmlElement
    */
+  
 
   /**
    * Validates the input element based on its type and value.
@@ -23,7 +24,7 @@ export class FormValidator {
     if (
       ['text', 'email', 'number', 'search', 'tel', 'url', 'password', 'time']
         .includes(htmlElement.type)) {
-      return this.#isNotEmpty(htmlElement.value)
+      return this.isNotEmpty(htmlElement.value)
     }
 
     if (htmlElement.type === 'checkbox') {
@@ -44,7 +45,7 @@ export class FormValidator {
    * @param {string} element - The value of the input element to check.
    * @returns {{valid: boolean, message: string}} The validation result object.
    */
-  #isNotEmpty (element) {
+  isNotEmpty (element) {
     const valid = element != null && element.trim().length > 0
     return {
       valid,
@@ -70,12 +71,13 @@ export class FormValidator {
    * Checks if the provided radiobox is ticked or not.
    *
    * @param {HTMLInputElement} element - The checkbox element to validate.
+   * @param elements
    * @returns {{valid: boolean, message: string}} The validation result object.
    */
-  #radioChecker (element) {
-    const radiobuttons = document.querySelectorAll(`input[type="${element.type}"]`
-    )
-    const valid = [...radiobuttons].some(radio => radio.checked)
+  #radioChecker (elements) {
+    /* const radiobuttons = document.querySelectorAll(`input[type="${element.type}"]`
+    ) */
+    const valid = [...elements].some(radio => radio.checked)
     return {
       valid,
       message: valid ? '✅ Radiobutton is selected' : '❌ Radiobutton is not selected'

@@ -11,14 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', async () => {
       if (!input) return
-      const validation = validator.validateInput(input)
+      /* const validation = validator.validateInput(input) */
 
       if (input) {
-        result.textContent = validation.message
-        console.log(validator.validateEmail(input.value))
+        const email = validator.validateEmail()
         if (input.type === 'number') {
-          console.log(validator.validateNumber(input.value))
+          console.log(validator.validateNumber())
+        } else {
+          /* console.log(validation) */
         }
+        result.textContent = email.message
       }
     })
   })

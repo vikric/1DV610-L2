@@ -13,14 +13,14 @@ export class PhoneNrValidator {
   /**
    * Validates the length of a phone number string.
    *
-   * @param {string} number - The phone number to validate.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validateNumber (number) {
-    console.log('Test', this.htmlElement)
+  validatePhoneNumber () {
+    if (this.htmlElement.value <= 0) {
+      return this.returnMessage('No number entered', false)
+    }
     const re = /\d/g
-    const digits = number.match(re).join('')
-
+    const digits = this.htmlElement.value.match(re).join('')
     return this.#checkNumberLength(digits)
   }
 
@@ -30,20 +30,23 @@ export class PhoneNrValidator {
    */
   #checkNumberLength (digits) {
     let message = ''
+    let valid = false
 
     if (digits.length < 10 || digits.length > 11) {
       message = 'Invalid length of phone number'
     } else {
       message = 'Valid length of phone number '
+      valid = true
     }
-    return this.returnMessage(message)
+    return this.returnMessage(message, valid)
   }
 
   /**
    *
    * @param message
+   * @param valid
    */
-  returnMessage (message) {
-    return message
+  returnMessage (message, valid) {
+    return { valid, message }
   }
 }
