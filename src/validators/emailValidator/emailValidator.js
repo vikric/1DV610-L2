@@ -1,4 +1,5 @@
 import { CreateResult } from '../createResult/createResult'
+
 /**
  *
  */
@@ -16,7 +17,6 @@ export class EmailValidator extends CreateResult {
   /**
    * Validates whether the provided email address is in a valid format.
    *
-   * @param {string} email - The email address to validate.
    * @returns {string} 'Valid email' if the email is valid, otherwise 'Not valid email'.
    */
   validateEmail () {

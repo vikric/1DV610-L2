@@ -9,9 +9,10 @@ export class Validator {
   /**
    * Initializes the Validator with form, email, and phone number validators.
    *
-   * @param element
+   * @param {HTMLElement} element The input element to be validated.
    */
   constructor (element) {
+    this.element = element
     this.formValidator = new FormValidator(element)
     this.emailValidator = new EmailValidator(element)
     this.phoneNrValidator = new PhoneNrValidator(element)
@@ -20,12 +21,11 @@ export class Validator {
   /**
    * Validates the provided input using the form validator.
    *
-   * @param {any} input - The input value to be validated.
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
-  validateInput (input) {
-    console.log(input.type)
-    switch (input.type) {
+  validateInput () {
+    console.log(this.element.type)
+    switch (this.element.type) {
       case 'text':
       case 'search':
       case 'password':
@@ -39,13 +39,18 @@ export class Validator {
       case 'number':
       case 'tel':
         return this.validateNumber()
+
+      case 'checkbox':
+        return this.validateCheckbox()
+
+      case 'radio':
+        return this.validateRadio()
     }
   }
 
   /**
    * Validates the provided email address.
    *
-   * @param {string} email - The email address to validate.
    * @returns {boolean} Returns true if the email is valid, otherwise false.
    */
   validateEmail () {
@@ -55,7 +60,6 @@ export class Validator {
   /**
    * Validates the provided phone number.
    *
-   * @param {string} number - The phone number to validate.
    * @returns {boolean} Returns true if the phone number is valid, otherwise false.
    */
   validateNumber () {
@@ -63,18 +67,20 @@ export class Validator {
   }
 
   /**
+   * Validates the provided checkboxes.
    *
-   * @param element
+   * @returns {boolean} Returns true if a checkbox is selected, otherwise false.
    */
-  validateCheckbox (element) {
-    return this.formValidator.checkBoxChecker(element)
+  validateCheckbox () {
+    return this.formValidator.checkBoxChecker()
   }
 
   /**
+   * Validates the radio button selection.
    *
-   * @param element
+   * @returns {boolean} Returns true if a radio button is selected, otherwise false.
    */
-  validateRadio (element) {
-    return this.formValidator.radiochecker(element)
+  validateRadio () {
+    return this.formValidator.radioChecker()
   }
 }

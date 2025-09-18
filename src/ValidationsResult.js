@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fields.forEach(field => {
     const button = field.querySelector('button')
     const input = field.querySelector('input, textarea, select')
+
     const result = field.querySelector('.result')
     const validator = new Validator(input)
 

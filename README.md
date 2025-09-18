@@ -2,7 +2,6 @@
 
 
 ## Todo
-PhoneNumber
 Email 
 Date-format
 Passwords

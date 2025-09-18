@@ -34,12 +34,8 @@ export class PhoneNrValidator extends CreateResult {
     const regex = /\d/g
     this.#phoneNumber = this.htmlElement.value.match(regex).join('')
 
-    const correctStartDigits = this.#startDigitsSWE()
-
-    if (correctStartDigits) {
-      return this.createResult(true, 'Valid number entered')
-    }
-    return this.createResult(false, 'Invalid number entered')
+    const valid = this.#startDigitsSWE()
+    return this.createResult(valid, valid ? 'Valid number entered' : 'Invalid number entered')
   }
 
   /**
