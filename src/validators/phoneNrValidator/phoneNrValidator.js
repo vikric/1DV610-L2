@@ -14,7 +14,13 @@ export class PhoneNrValidator extends CreateResult {
   }
 
   /**
-   * Validates the length of a phone number string.
+   * The variables which holds the phonenumber
+   *
+   */
+  #phoneNumber
+
+  /**
+   * Validates the phone number.
    *
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
@@ -22,25 +28,46 @@ export class PhoneNrValidator extends CreateResult {
     if (this.htmlElement.value <= 0) {
       return this.createResult(false, 'No number entered')
     }
-    const re = /\d/g
-    const digits = this.htmlElement.value.match(re).join('')
-    return this.#checkNumberLength(digits)
+    // Feature / Bug that letters will be removed with this.
+    // Number 070 123 45 67 Testkalle will work
+    // Since it removes everything except digits
+    const regex = /\d/g
+    this.#phoneNumber = this.htmlElement.value.match(regex).join('')
+
+    const correctStartDigits = this.#startDigitsSWE()
+
+    if (correctStartDigits) {
+      return this.createResult(true, 'Valid number entered')
+    }
+    return this.createResult(false, 'Invalid number entered')
   }
 
   /**
+   * Validates the length of the number.
    *
-   * @param digits
+   * @param {string} length  - How long the number should be.
+   * @returns {boolean} Result if length of number is same as argument.
    */
-  #checkNumberLength (digits) {
-    let message = ''
-    let valid = false
-
-    if (digits.length < 10 || digits.length > 11) {
-      message = 'Invalid length of phone number'
-    } else {
-      message = 'Valid length of phone number '
-      valid = true
+  #checkNumberLength (length) {
+    if (this.#phoneNumber.length === length) {
+      return true
     }
-    return this.createResult(message, valid)
+    return false
+  }
+
+  /**
+   * Checks if the phone number starts with valid Swedish start digits and has the correct length.
+   *
+   * @returns {boolean} True if the phone number has valid start digits and correct length, otherwise false.
+   */
+  #startDigitsSWE () {
+    const startDigits = this.#phoneNumber.substring(0, 2)
+
+    switch (startDigits) {
+      case '46':
+        return this.#checkNumberLength(11)
+      case '07':
+        return this.#checkNumberLength(10)
+    }
   }
 }

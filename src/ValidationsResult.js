@@ -12,13 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', async () => {
       if (!input) return
       const validation = validator.validateInput(input)
-      if (input) {
-        /*        if (input.type === 'email') {
-          validation = validator.validateEmail()
-        } else if (input.type === 'number') {
-          validation = validator.validateNumber()
-        } */
-      }
       result.textContent = validation.message
     })
   })
