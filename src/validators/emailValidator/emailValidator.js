@@ -1,16 +1,14 @@
-import { CreateResult } from '../createResult/createResult'
-
+import { createResult } from '../../middleWare/middleWare.js'
 /**
  *
  */
-export class EmailValidator extends CreateResult {
+export class EmailValidator {
   /**
    * Creates an instance of EmailValidator.
    *
    * @param {HTMLElement} htmlElement - The HTML element containing the email input.
    */
   constructor (htmlElement) {
-    super()
     this.htmlElement = htmlElement
   }
 
@@ -27,6 +25,6 @@ export class EmailValidator extends CreateResult {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const valid = regex.test((this.htmlElement.value))
     console.log(valid)
-    return this.createResult(valid, valid ? 'Valid emailaddress' : 'Invalid emailaddress')
+    return createResult(valid, valid ? 'Valid emailaddress' : 'Invalid emailaddress')
   }
 }

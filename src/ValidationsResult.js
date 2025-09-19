@@ -1,4 +1,4 @@
-import { Validator } from './validators/index.js'
+import { Validator } from './validators/validator.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   const fields = document.querySelectorAll('.field')
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', async () => {
       if (!input) return
-      const validation = validator.validateInput(input)
+      const validation = validator.validateInput()
       result.textContent = validation.message
     })
   })

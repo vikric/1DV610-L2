@@ -1,15 +1,15 @@
-import { CreateResult } from '../createResult/createResult'
+import { createResult } from '../../middleWare/middleWare.js'
+
 /**
  *
  */
-export class FormValidator extends CreateResult {
+export class FormValidator {
   /**
    * Creates an instance of FormValidator.
    *
    * @param {HTMLElement} htmlElement - The HTML element containing the input.
    */
   constructor (htmlElement) {
-    super()
     this.htmlElement = htmlElement
   }
 
@@ -23,7 +23,7 @@ export class FormValidator extends CreateResult {
       return { valid: false, message: '❌ HTMLElement is empty' }
     }
     const valid = this.htmlElement != null && this.htmlElement.value.trim().length > 0
-    return this.createResult(valid, valid ? 'Input is not empty' : 'Input is empty')
+    return createResult(valid, valid ? 'Input is not empty' : 'Input is empty')
   }
 
   /**
@@ -37,7 +37,7 @@ export class FormValidator extends CreateResult {
       checkBoxes = [...checkBoxes]
     }
     const valid = [...checkBoxes].some(checkbox => checkbox.checked)
-    return this.createResult(valid, valid ? 'Checkbox is checked' : 'Checkbox is not checked')
+    return createResult(valid, valid ? 'Checkbox is checked' : 'Checkbox is not checked')
   }
 
   /**
@@ -48,6 +48,6 @@ export class FormValidator extends CreateResult {
   radioChecker () {
     const radios = document.querySelectorAll('input[type="radio"]')
     const valid = [...radios].some(radio => radio.checked)
-    return this.createResult(valid, valid ? 'Radiobutton is selected' : 'Radiobutton is not selected')
+    return createResult(valid, valid ? 'Radiobutton is selected' : 'Radiobutton is not selected')
   }
 }

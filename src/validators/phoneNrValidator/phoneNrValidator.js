@@ -1,15 +1,15 @@
-import { CreateResult } from '../createResult/createResult'
+import { createResult } from '../../middleWare/middleWare.js'
+
 /**
  *
  */
-export class PhoneNrValidator extends CreateResult {
+export class PhoneNrValidator {
   /**
    * Creates an instance of PhoneNrValidator.
    *
    * @param {HTMLElement} htmlElement - The HTML element containing the number input.
    */
   constructor (htmlElement) {
-    super()
     this.htmlElement = htmlElement
   }
 
@@ -35,7 +35,7 @@ export class PhoneNrValidator extends CreateResult {
     this.#phoneNumber = this.htmlElement.value.match(regex).join('')
 
     const valid = this.#startDigitsSWE()
-    return this.createResult(valid, valid ? 'Valid number entered' : 'Invalid number entered')
+    return createResult(valid, valid ? 'Valid number entered' : 'Invalid number entered')
   }
 
   /**

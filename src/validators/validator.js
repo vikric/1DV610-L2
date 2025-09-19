@@ -1,7 +1,9 @@
 import { EmailValidator } from './EmailValidator/emailValidator.js'
 import { FormValidator } from './formValidator/formValidator.js'
 import { PhoneNrValidator } from './phoneNrValidator/phoneNrValidator.js'
-
+import { PersonalNumberValidator } from './personNumberValidator/personalNumberValidator.js'
+import { missingInputSendError } from '../middleWare/middleWare.js'
+import { PasswordValidator } from './passwordValidator/passwordValidator.js'
 /**
  *
  */
@@ -12,10 +14,16 @@ export class Validator {
    * @param {HTMLElement} element The input element to be validated.
    */
   constructor (element) {
+    if (!(element instanceof HTMLElement)) {
+      missingInputSendError()
+    }
     this.element = element
+
     this.formValidator = new FormValidator(element)
     this.emailValidator = new EmailValidator(element)
     this.phoneNrValidator = new PhoneNrValidator(element)
+    this.personalNumberValidator = new PersonalNumberValidator(element)
+    this.passwordValidator = new PasswordValidator(element)
   }
 
   /**
@@ -24,7 +32,8 @@ export class Validator {
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
   validateInput () {
-    console.log(this.element.type)
+    console.log(this.passwordValidator())
+    console.log(this.personalNumberValidator.checkLength())
     switch (this.element.type) {
       case 'text':
       case 'search':
@@ -83,4 +92,8 @@ export class Validator {
   validateRadio () {
     return this.formValidator.radioChecker()
   }
+
+  pa
+
+  
 }
