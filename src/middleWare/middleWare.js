@@ -18,3 +18,10 @@ export function createResult (valid, message) {
 export function missingInputSendError () {
   throw new Error('Missing htmlElement')
 }
+
+/**
+ *
+ */
+export function missingValue () {
+  throw new TypeError('STOP')
+}

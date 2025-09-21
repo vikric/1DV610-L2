@@ -32,8 +32,8 @@ export class Validator {
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
   validateInput () {
-    console.log(this.passwordValidator())
-    console.log(this.personalNumberValidator.checkLength())
+    /* console.log(this.passwordValidator()) */
+    /* console.log(this.personalNumberValidator.checkLength()) */
     switch (this.element.type) {
       case 'text':
       case 'search':
@@ -93,7 +93,11 @@ export class Validator {
     return this.formValidator.radioChecker()
   }
 
-  pa
-
-  
+  /**
+   *
+   * @param length
+   */
+  validatePassword (length) {
+    return this.passwordValidator.checkLength(length)
+  }
 }

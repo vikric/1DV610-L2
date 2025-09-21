@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', async () => {
       if (!input) return
       const validation = validator.validateInput()
+      console.log(validator.validatePassword(5))
       result.textContent = validation.message
     })
   })
