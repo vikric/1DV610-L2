@@ -4,16 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const fields = document.querySelectorAll('.field')
 
   fields.forEach(field => {
+    const validator = new Validator()
+
     const button = field.querySelector('button')
     const input = field.querySelector('input, textarea, select')
-
     const result = field.querySelector('.result')
-    const validator = new Validator(input)
 
     button.addEventListener('click', async () => {
       if (!input) return
-      const validation = validator.validateInput()
-      console.log(validator.validatePassword(5))
+      const validation = validator.validateInput(input.type, input.value)
+      /* console.log(validator.validatePassword(5)) */
       result.textContent = validation.message
     })
   })

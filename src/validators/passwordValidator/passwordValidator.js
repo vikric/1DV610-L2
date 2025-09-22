@@ -15,37 +15,36 @@ export class PasswordValidator {
   /**
    *
    * @param value
+   * @param password
+   * @param minlength
    */
-  checkLength (value = 8) {
-    if (!value) {
+  checkPassword (password, minlength = 8) {
+    if (!password) {
       return missingValue()
     }
 
-    const password = this.htmlElement.value
-    const valid = password.length > value
+    const validLength = password.length > minlength
     const upperCase = /[A-Z]/
     const lowerCase = /[a-z]/
     const digits = /[0-9]/
-    let lowerCount = 0
-    let upperCount = 0
-    let numbers = 0
 
-    if (valid) {
+    let hasUpperCase = 0
+    let hasLowerCase = 0
+    let hasDigits = 0
+
+    if (validLength) {
       for (const count of password) {
         if (upperCase.test(count)) {
-          upperCount++
+          hasLowerCase++
         } else if (lowerCase.test(count)) {
-          lowerCount++
+          hasUpperCase++
         } else if (digits.test(count)) {
-          numbers++
+          hasDigits++
         }
       }
-      if (lowerCount > 1 && upperCount > 1 && numbers > 1) {
-        passwordIsValid()
-        return createResult(valid, valid ? 'Password length is valid' : 'Password to simple')
-      } else {
-        return createResult(valid, valid ? 'Pa')
-      }
+      if (hasUpperCase > 1 && hasLowerCase > 1 && hasDigits > 1) {
+        return createResult(true, 'Password length is valid')
+      } // ELSE ???!
     }
 
     console.log(password)
