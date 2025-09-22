@@ -23,7 +23,7 @@ export class PasswordValidator {
       return missingValue()
     }
 
-    const validLength = password.length > minlength
+    const validLength = password.length >= minlength
     const upperCase = /[A-Z]/
     const lowerCase = /[a-z]/
     const digits = /[0-9]/
@@ -43,12 +43,11 @@ export class PasswordValidator {
         }
       }
       if (hasUpperCase > 1 && hasLowerCase > 1 && hasDigits > 1) {
-        return createResult(true, 'Password length is valid')
-      } // ELSE ???!
+        return createResult(true, 'Password is valid')
+      } /* else {
+      return createResult(false, 'Password doesnt meet the rquirements')} */
     }
-
-    console.log(password)
-    /* console.log(test.test(password)) */
+return createResult(false, 'Password doesnt meet the rquirements')
   }
 }
 // 12 eller 10 siffror

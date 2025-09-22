@@ -16,7 +16,6 @@ export class EmailValidator {
     // https://www.geeksforgeeks.org/javascript/how-to-validate-email-address-using-regexp-in-javascript/
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const valid = regex.test((email))
-    console.log(valid)
     return createResult(valid, valid ? 'Valid emailaddress' : 'Invalid emailaddress')
   }
 }
