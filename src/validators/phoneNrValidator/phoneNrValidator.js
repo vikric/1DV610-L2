@@ -7,17 +7,15 @@ export class PhoneNrValidator {
   /**
    * Validates the phone number.
    *
-   * @param phoneNumber
+   * @param {string} phoneNumber - The phone number to validate.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePhoneNumber (phoneNumber) {
     if (!phoneNumber || phoneNumber.length < 1) {
       return createResult(false, 'No number entered')
     }
-    // Feature / Bug that letters will be removed with this.
-    // Number 070 123 45 67 Testkalle will work
-    // Since it removes everything except digits
-    const digitsOnly = phoneNumber.replace(/\D/g, '')
+
+    const digitsOnly = phoneNumber.replaceAll('-', '').replaceAll(' ', '')
     if (!digitsOnly) return createResult(false, 'Invalid number entered')
 
     const startDigits = digitsOnly.substring(0, 2)

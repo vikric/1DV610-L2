@@ -15,7 +15,14 @@ test('returns false when password doesnt meet requirements', () => {
 })
 
 test('throws a TypeError with message STOP', () => {
-  const result = validator.checkPassword()
-  expect(result).toThrow(TypeError)
-  expect(result).toThrow('STOP')
-})
+  /**
+   *
+   */
+  const test = () => {
+    return validator.checkPassword()
+  }
+
+  expect(test).toThrow(Error)
+  expect(test).toThrow('Missing Value')
+}
+)

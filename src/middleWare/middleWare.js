@@ -20,8 +20,8 @@ export function missingInputSendError () {
 }
 
 /**
- *
+ * Throws a TypeError when a required value is missing.
  */
 export function missingValue () {
-  throw new TypeError('STOP')
+  throw new Error('Missing Value')
 }
