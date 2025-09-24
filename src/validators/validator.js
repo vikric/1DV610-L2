@@ -2,7 +2,6 @@ import { EmailValidator } from './EmailValidator/emailValidator.js'
 import { FormValidator } from './formValidator/formValidator.js'
 import { PhoneNrValidator } from './phoneNrValidator/phoneNrValidator.js'
 import { PersonalNumberValidator } from './personNumberValidator/personalNumberValidator.js'
-import { missingInputSendError } from '../middleWare/middleWare.js'
 import { PasswordValidator } from './passwordValidator/passwordValidator.js'
 import { DOMFormValidator } from './domFormValidator/DOMFormValidator.js'
 /**
@@ -12,7 +11,6 @@ export class Validator {
   /**
    * Initializes the Validator with form, email, and phone number validators.
    *
-   * @param {HTMLElement} element The input element to be validated.
    */
   constructor () {
     this.formValidator = new FormValidator()
@@ -27,50 +25,57 @@ export class Validator {
    * Validates the provided input using the form validator.
    *
    * @param {string} type The type of the input element to validate.
-   * @param {*} value The value of the input element to validate.
+   * @param {*} input The value of the input element to validate.
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
-  validateInput (type, value) {
-    console.log(type, value)
+  validateInput (type, input) {
+    console.log(type, input)
     switch (type) {
       case 'text':
       case 'search':
       case 'password':
       case 'time':
       case 'url':
-        return this.formValidator.isNotEmpty(value)
+        return this.formValidator.isNotEmpty(input)
 
       case 'email':
-        return this.validateEmail(value)
+        return this.validateEmail(input)
 
       case 'number':
       case 'tel':
-        return this.validateNumber(value)
+        return this.validateNumber(input)
 
       case 'checkbox':
-        return this.validateCheckbox(value)
+        return this.validateCheckbox(input)
 
       case 'radio':
-        return this.validateRadio(value)
+        return this.validateRadio(input)
     }
   }
 
   /**
    * Validates the provided email address.
    *
+   * @param {string} email The email address to validate.
    * @returns {boolean} Returns true if the email is valid, otherwise false.
    */
-  validateEmail (value) {
-    return this.emailValidator.validateEmail(value)
+  validateEmail (email) {
+    try {
+      return this.emailValidator.validateEmail(email)
+    } catch (e) {
+      console.error(e)
+      return false
+    }
   }
 
   /**
    * Validates the provided phone number.
    *
+   * @param {number} number - The number to validate.
    * @returns {boolean} Returns true if the phone number is valid, otherwise false.
    */
-  validateNumber (value) {
-    return this.phoneNrValidator.validatePhoneNumber(value)
+  validateNumber (number) {
+    return this.phoneNrValidator.validatePhoneNumber(number)
   }
 
   /**
@@ -92,12 +97,13 @@ export class Validator {
   }
 
   /**
+   * Validates the provided password against a minimum length requirement.
    *
-   * @param length
-   * @param value
-   * @param minlength
+   * @param {string} password The password string to validate.
+   * @param {number} [minlength=8] The minimum length required for the password.
+   * @returns {boolean} Returns true if the password meets the requirements, otherwise false.
    */
-  validatePassword (value, minlength = 8) {
-    return this.passwordValidator.checkPassword(value, minlength)
+  validatePassword (password, minlength = 8) {
+    return this.passwordValidator.checkPassword(password, minlength)
   }
 }

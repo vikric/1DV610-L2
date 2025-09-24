@@ -47,8 +47,7 @@ export class PasswordValidator {
       } /* else {
       return createResult(false, 'Password doesnt meet the rquirements')} */
     }
-return createResult(false, 'Password doesnt meet the rquirements')
+    return createResult(false, 'Password doesnt meet the rquirements')
   }
 }
-// 12 eller 10 siffror
-// 11 22 33 44 55 66
+

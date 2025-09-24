@@ -10,6 +10,7 @@ export class EmailValidator {
    * @returns {string} 'Valid email' if the email is valid, otherwise 'Not valid email'.
    */
   validateEmail (email) {
+    this.#validateType(email)
     if (!email) {
       return createResult(false, 'Enter an emailaddress')
     }
@@ -17,5 +18,15 @@ export class EmailValidator {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const valid = regex.test((email))
     return createResult(valid, valid ? 'Valid emailaddress' : 'Invalid emailaddress')
+  }
+
+  /**
+   *
+   * @param email
+   */
+  #validateType (email) {
+    if (typeof email !== 'string') {
+      throw new TypeError('Must be a string')
+    }
   }
 }

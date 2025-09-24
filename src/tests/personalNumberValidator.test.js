@@ -3,13 +3,13 @@ import { PersonalNumberValidator } from '../validators/personNumberValidator/per
 const validator = new PersonalNumberValidator()
 
 test('returns valid when personal number have have correct length', () => {
-  const result = validator.checkLength('190102034455')
+  const result = validator.validatePersonalNumber('190102034455')
   expect(result.valid).toBe(true)
   expect(result.message).toBe('✅ Valid number entered')
 })
 
 test('returns false when month is incorrect', () => {
-  const result = validator.checkLength('190113034455')
+  const result = validator.validatePersonalNumber('190113034455')
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Invalid month')
 })

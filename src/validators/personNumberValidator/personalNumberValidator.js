@@ -15,56 +15,78 @@ export class PersonalNumberValidator {
    *
    * @param str
    */
-  checkLength (str) {
-    let valid = false
-    const century = /^(19|20)/
+  validatePersonalNumber (str) {
     if (str.length === 12) {
       str = this.removeCentury(str)
+    }
+
+    if (str.length !== 10) {
+      return createResult(false, 'Invalid length')
     }
 
     console.log(str)
 
     const year = str.substring(0, 2)
-
-    console.log('year:', year)
-
     const month = str.substring(2, 4)
+    const day = str.substring(4, 6)
     if (month > 12) {
-      valid = false
       return createResult(false, 'Invalid month')
     }
-    console.log('month', month)
-    const day = str.substring(4, 6)
-    console.log('day', day)
+    const date = new Date(year, month - 1, day)
+    const validYear = this.checkYear(year, date)
+    const validMonth = this.checkMonth(month, date)
+    const validDay = this.checkDay(day, date)
+
     const last = str.substr(-4)
     console.log('last 4', last)
+    console.log(validYear, validMonth, validDay)
 
-    /*     January (31 days)
-            February (28 days in a common year and 29 days in leap years)
-            March (31 days)
-            April (30 days)
-            May (31 days)
-            June (30 days)
-            July (31 days)
-            August (31 days)
-            September (30 days)
-            October (31 days)
-            November (30 days)
-            December (31 days) */
+    if (validYear && validMonth && validDay) {
+      // I get year, month and day from this. Not sure how to validate the remaining 4.
+      // https:// sv.wikipedia.org/wiki/Luhn-algoritmen
 
-    valid = true
-    /* console.log(last) */
-
-    switch (str.length) {
-      case 10:
-
-        return createResult(valid, valid ? 'Valid number entered' : 'Invalid number entered')
-      case 12:
-
-        return createResult(valid, valid ? 'Valid number entered' : 'Invalid number entered')
+      return createResult(true, 'Correct date entered')
     }
 
-    return createResult(valid, valid ? 'Valid number entered' : 'Invalid number entered')
+    return createResult(false, 'Incorrect date entered')
+  }
+
+  /**
+   *
+   * @param date
+   * @param year
+   */
+  checkYear (year, date) {
+    if (date.getYear() === parseInt(year)) {
+      return true
+    }
+    return false
+  }
+
+  /**
+   *
+   * @param month
+   * @param date
+   * @param year
+   */
+  checkMonth (month, date) {
+    if (date.getMonth() + 1 === parseInt(month)) {
+      return true
+    }
+    return false
+  }
+
+  /**
+   *
+   * @param day
+   * @param date
+   * @param year
+   */
+  checkDay (day, date) {
+    if (date.getDate() === parseInt(day)) {
+      return true
+    }
+    return false
   }
 }
 

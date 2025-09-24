@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', async () => {
       if (!input) return
       const validation = validator.validateInput(input.type, input.value)
-      const number = person.checkLength('190102034455')
+      validator.validateEmail(5)
+      person.validatePersonalNumber('190102034455')
       /* console.log(validator.validatePassword(5)) */
       result.textContent = validation.message
     })
