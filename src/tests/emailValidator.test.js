@@ -1,4 +1,4 @@
-import { EmailValidator } from '../validators/EmailValidator/emailValidator'
+import { EmailValidator } from '../validators/EmailValidator/emailValidator.js'
 
 const validator = new EmailValidator()
 
@@ -13,9 +13,21 @@ test('returns invalid when value is not correct', () => {
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Invalid emailaddress')
 })
-
-test('returns invalid when value is empty', () => {
-  const result = validator.validateEmail()
+test('returns invalid when emailaddress is not provided', () => {
+  const result = validator.validateEmail('')
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Enter an emailaddress')
 })
+
+test('throws a TypeError when input is empty', () => {
+  /**
+   *
+   */
+  const test = () => {
+    return validator.validateEmail()
+  }
+
+  expect(test).toThrow(TypeError)
+  expect(test).toThrow('Must be a string')
+}
+)

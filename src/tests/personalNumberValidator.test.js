@@ -5,7 +5,7 @@ const validator = new PersonalNumberValidator()
 test('returns valid when personal number have have correct length', () => {
   const result = validator.validatePersonalNumber('190102034455')
   expect(result.valid).toBe(true)
-  expect(result.message).toBe('✅ Valid number entered')
+  expect(result.message).toBe('✅ Correct date entered')
 })
 
 test('returns false when month is incorrect', () => {
