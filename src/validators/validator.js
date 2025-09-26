@@ -75,12 +75,18 @@ export class Validator {
    * @returns {boolean} Returns true if the phone number is valid, otherwise false.
    */
   validateNumber (number) {
-    return this.phoneNrValidator.validatePhoneNumber(number)
+    try {
+      return this.phoneNrValidator.validatePhoneNumber(number)
+    } catch (e) {
+      console.error(e)
+      return false
+    }
   }
 
   /**
    * Validates the provided checkboxes.
    *
+   * @param input
    * @returns {boolean} Returns true if a checkbox is selected, otherwise false.
    */
   validateCheckbox () {
@@ -105,5 +111,13 @@ export class Validator {
    */
   validatePassword (password, minlength = 8) {
     return this.passwordValidator.checkPassword(password, minlength)
+  }
+
+  /**
+   *
+   * @param personalNumber
+   */
+  validatePersonalNumber (personalNumber) {
+    return this.personalNumberValidator.validatePersonalNumber(personalNumber)
   }
 }

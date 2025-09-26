@@ -13,8 +13,9 @@ test('returns invalid when value is not correct', () => {
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Invalid emailaddress')
 })
+
 test('returns invalid when emailaddress is not provided', () => {
-  const result = validator.validateEmail('')
+  const result = validator.validateEmail()
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Enter an emailaddress')
 })
@@ -24,10 +25,9 @@ test('throws a TypeError when input is empty', () => {
    *
    */
   const test = () => {
-    return validator.validateEmail()
+    return validator.validateEmail(5)
   }
 
   expect(test).toThrow(TypeError)
   expect(test).toThrow('Must be a string')
-}
-)
+})

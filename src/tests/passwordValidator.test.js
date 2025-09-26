@@ -9,20 +9,22 @@ test('returns valid when password is correct length', () => {
 })
 
 test('returns false when password doesnt meet requirements', () => {
-  const result = validator.checkPassword('Kale')
+  const result = validator.checkPassword('Kalle')
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Password doesnt meet the rquirements')
 })
 
-test('throws a TypeError with message STOP', () => {
+test('returns false when password is not provided', () => {
+  const result = validator.checkPassword()
+  expect(result.valid).toBe(false)
+  expect(result.message).toBe('❌ Password was not provided')
+})
+
+test('returns false when password is not a string', () => {
   /**
    *
    */
-  const test = () => {
-    return validator.checkPassword()
-  }
-
-  expect(test).toThrow(Error)
-  expect(test).toThrow('Missing Value')
-}
-)
+  const test = () => { return validator.checkPassword(5) }
+  expect(test).toThrow(TypeError)
+  expect(test).toThrow('Must be a string')
+})

@@ -1,4 +1,4 @@
-import { createResult } from '../../middleWare/middleWare.js'
+import { createResult, validateType } from '../../middleWare/middleWare.js'
 
 /**
  *
@@ -14,6 +14,7 @@ export class PhoneNrValidator {
     if (!phoneNumber || phoneNumber.length < 1) {
       return createResult(false, 'No number entered')
     }
+    validateType(phoneNumber)
 
     const digitsOnly = phoneNumber.replaceAll('-', '').replaceAll(' ', '')
     if (!digitsOnly) return createResult(false, 'Invalid number entered')

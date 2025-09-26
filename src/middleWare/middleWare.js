@@ -25,3 +25,16 @@ export function missingInputSendError () {
 export function missingValue () {
   throw new Error('Missing Value')
 }
+
+/**
+ *
+ * @param input
+ */
+export function validateType (input) {
+  switch (typeof input) {
+    case 'string':
+      break
+    default :
+      throw new TypeError('Must be a string')
+  }
+}

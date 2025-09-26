@@ -7,48 +7,63 @@ export class PersonalNumberValidator {
    *
    * @param str
    */
-  removeCentury (str) {
+  #removeCentury (str) {
     return str.substring(2)
   }
 
   /**
    *
-   * @param str
+   * @param personalNumber
    */
-  validatePersonalNumber (str) {
-    if (str.length === 12) {
-      str = this.removeCentury(str)
+  #lengthCheck (personalNumber) {
+    if (personalNumber.length === 12) {
+      personalNumber = this.#removeCentury(personalNumber)
     }
 
-    if (str.length !== 10) {
+    if (personalNumber.length !== 10) {
+      return false
+    }
+
+    return personalNumber
+  }
+
+  /**
+   *
+   * @param personalNumber
+   */
+  validatePersonalNumber (personalNumber) {
+    personalNumber = this.#lengthCheck(personalNumber)
+
+    if (!personalNumber) {
       return createResult(false, 'Invalid length')
     }
 
-    console.log(str)
+    const validBirthDate = this.#validDate(personalNumber)
+    const lastDigit = this.luhnAlgorithm(personalNumber)
+    if (validBirthDate && lastDigit) {
+      return createResult(true, 'Valid personalnumber provided')
+    }
 
-    const year = str.substring(0, 2)
-    const month = str.substring(2, 4)
-    const day = str.substring(4, 6)
+    return createResult(false, 'Invalid personalnumber provided')
+  }
+
+  /**
+   *
+   * @param personalNumber
+   */
+  #validDate (personalNumber) {
+    const year = personalNumber.substring(0, 2)
+    const month = personalNumber.substring(2, 4)
+    const day = personalNumber.substring(4, 6)
     if (month > 12) {
-      return createResult(false, 'Invalid month')
+      return false
     }
+
     const date = new Date(year, month - 1, day)
-    const validYear = this.checkYear(year, date)
-    const validMonth = this.checkMonth(month, date)
-    const validDay = this.checkDay(day, date)
-
-    const last = str.substr(-4)
-    console.log('last 4', last)
-    console.log(validYear, validMonth, validDay)
-
-    if (validYear && validMonth && validDay) {
-      // I get year, month and day from this. Not sure how to validate the remaining 4.
-      // https:// sv.wikipedia.org/wiki/Luhn-algoritmen
-
-      return createResult(true, 'Correct date entered')
-    }
-
-    return createResult(false, 'Incorrect date entered')
+    const validYear = this.#checkYear(year, date)
+    const validMonth = this.#checkMonth(month, date)
+    const validDay = this.#checkDay(day, date)
+    return validYear && validMonth && validDay
   }
 
   /**
@@ -56,7 +71,7 @@ export class PersonalNumberValidator {
    * @param date
    * @param year
    */
-  checkYear (year, date) {
+  #checkYear (year, date) {
     if (date.getYear() === parseInt(year)) {
       return true
     }
@@ -69,7 +84,7 @@ export class PersonalNumberValidator {
    * @param date
    * @param year
    */
-  checkMonth (month, date) {
+  #checkMonth (month, date) {
     if (date.getMonth() + 1 === parseInt(month)) {
       return true
     }
@@ -82,13 +97,32 @@ export class PersonalNumberValidator {
    * @param date
    * @param year
    */
-  checkDay (day, date) {
+  #checkDay (day, date) {
     if (date.getDate() === parseInt(day)) {
       return true
     }
     return false
   }
-}
 
-// 12 eller 10 siffror
-// 11 22 33 44 55 66
+  /**
+   *
+   * @param personalNumber
+   */
+  // https://en.wikipedia.org/wiki/Luhn_algorithm
+  luhnAlgorithm (personalNumber) {
+    let totalNumber = 0
+    for (let i = 0; i < personalNumber.length - 1; i++) {
+      /* console.log(personalNumber[i]) */
+      let digit = parseInt(personalNumber[i])
+
+      if (i % 2 === 0) {
+        digit *= 2
+        if (digit > 9) {
+          digit = Math.floor(digit / 10) + (digit % 10)
+        }
+      }
+      totalNumber += digit
+    }
+    return (10 - (totalNumber % 10)) % 10
+  }
+}

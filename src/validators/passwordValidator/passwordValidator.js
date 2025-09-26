@@ -1,17 +1,9 @@
-import { createResult, missingValue } from '../../middleWare/middleWare'
+import { createResult, validateType } from '../../middleWare/middleWare'
 
 /**
  *
  */
 export class PasswordValidator {
-  /**
-   *
-   * @param htmlElement
-   */
-  constructor (htmlElement) {
-    this.htmlElement = htmlElement
-  }
-
   /**
    *
    * @param value
@@ -20,8 +12,9 @@ export class PasswordValidator {
    */
   checkPassword (password, minlength = 8) {
     if (!password) {
-      return missingValue()
+      return createResult(false, 'Password was not provided')
     }
+    validateType(password)
 
     const validLength = password.length >= minlength
     const upperCase = /[A-Z]/
@@ -50,4 +43,3 @@ export class PasswordValidator {
     return createResult(false, 'Password doesnt meet the rquirements')
   }
 }
-
