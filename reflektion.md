@@ -1,6 +1,4 @@
-Eftersom laborationen påbörjas innan många av föreläsningarna har skett så begränsar vi mängden krav på kodkvalitet i första inlämningen till de som nämns i kapitel 2 och 3. Det är viktigare att reflektera och återkoppla till boken än att er kod är perfekt. Jag kräver alltså inte att ni justerar er kod men däremot att er reflektion visar på förståelse för kursmaterialet. Det är här tillåtet att antingen ändra er kod eller leva vidare med den, men bristen skall då finnas angiven i era reflektioner.
-
-
+# Reflections 
 
 | Name               | Explanation               | Reflection & rules from Clean Code   | 
 |-----------------------|--------------------------|---------------------------------------|
@@ -10,19 +8,29 @@ Eftersom laborationen påbörjas innan många av föreläsningarna har skett så
 | luhnAlgorithm         | Method which calculates the last digit in a personalnumber   | **Avoid Disinformation:** The name only suggest that the luhn algorithm is used but doesn't give any valuable information. |
 | Value                 | Many methods had arguements named value      | **Add Meaningful Context:** The name value only says it's a value. Not what the value represents which makes it unclear.  |
 
+--- 
+### Chapter 2 reflections
+
+After reading this chapter and looking at my code I found some problems. My variables & arguments often don't give any information. I usually name them **value** and then I have to go back and use a console.log to see what is being sent. With better naming system I would save myself time by having more descriptive names. It will be even worse for other people trying to read my code. 
+
+I have also noticed that I use **Cute** variable names which is only meant to be for testing. But sometimes I forget about them and find them laying around in my code much later. Since I don't have a good naming system I don't know if it's a temporary variable name or not. So have to read the entire block to find out which I also spend way to much time doing.
+
+---
+
+| Methodname               | Link or code               | Amount of rows   | Reflection
+|-----------------------|--------------------------|---------------------------------------|--|
+| validatePhoneNumber   | ![alt text](./images/image-1.png) |  10  | Test 1
+| luhnAlgorithm         |                                   |  9  | Test 2
+| validatePassword      |                                   |  22  | Test 3
+| validateInput         |                                   |  16  | Test 4 
+| validDate             |                                   |  8  | Test 5
+
+Läs kapitel 3. Skapa en tabell över dina fem längsta metoder/funktioner. Utgå ifrån kapitel 3s titlar och ange de viktigaste reglerna (som följs/bryts). Föreslå förändringar.
+
+| validateDay, month & year | ![alt text](./images/image-1.png) |  11  | Here I disagree with the book and think this should have been 1 method instead of three. 3 different methods that are so similar 
 
 
-
-
-validatePhoneNumber har inget bra namn för den validerar bara svenska nummer. Antingen olika publika metoder för länder eller privata submetoder som förklarar vilket land det gäller.
-
-isNotEmpty har ett dåligt namn för "is" brukar kopplas samman med att return värdet ska vara en boolean. 
-Alla andra mina publika metoder heter validate för att göra det enklare men tyckte validateNotEmpty blev ännu värre.
-
-
-
-
-
+Skriv även en kort reflektion kring innehållet i kapitel 3. Ni kanske upptäcker en brist hos er tidigare skrivning av funktionerna, ni kanske inte håller med någon av “reglerna” från kursboken. Jag ser hellre att ni hittar och reflekterar över era brister än att ni döljer dem.
 
 
 
@@ -30,4 +38,3 @@ Har använt mig utav LNU eslint som kräver JSDOC. Gillar formatet men mycket av
 
 validatePhoneNumber Gör för mycket borde delas upp i mindre
 
-PersonalNumberValidator validateDay, month och year har jag delat upp för mycket. Gör koden mer rörig än om det varit 1 metod som gjort allt.

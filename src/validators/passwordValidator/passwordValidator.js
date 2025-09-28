@@ -5,10 +5,11 @@ import { createResult, validateType } from '../../middleWare/middleWare.js'
  */
 export class PasswordValidator {
   /**
+   * Validates a password based on minimum length and character requirements.
    *
-   * @param value
-   * @param password
-   * @param minlength
+   * @param {string} password - The password string to validate.
+   * @param {number} [minlength = 8] - The minimum required length for the password.
+   * @returns {object} Result object indicating if the password is valid and a message.
    */
   validatePassword (password, minlength = 8) {
     if (!password) {

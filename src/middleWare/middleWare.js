@@ -27,8 +27,9 @@ export function missingValue () {
 }
 
 /**
+ * Validates that the input is a string.
  *
- * @param input
+ * @param {any} input - The value to validate.
  */
 export function validateType (input) {
   switch (typeof input) {

@@ -14,7 +14,7 @@ In these table you'll see the public methods in the classes that are used and wh
 | personNumberValidator | validatePersonalNumber   | validatePersonalNumber("1212121212")  | True   |
 | phoneNrValidator      | validatePhoneNumber      | validatePhoneNumber("070 123 12 34")  | True   |
 
-![alt text](image.png)
+![alt text](./images/image.png)
 
 ---
 In the class called **DOMFormValidator** you have 2 methods that have been tested manually. These take data from htmlElement which is the reason they are tested manually instead of with Jest.

@@ -64,9 +64,11 @@ export class PersonalNumberValidator {
   }
 
   /**
+   * Validates if the provided year matches the year part of the given date object.
    *
-   * @param date
-   * @param year
+   * @param {string} year - The year extracted from the personal number.
+   * @param {Date} date - The Date object created from the personal number.
+   * @returns {boolean} Returns true if the year matches, otherwise false.
    */
   #validateYear (year, date) {
     if (date.getYear() === parseInt(year)) {
@@ -76,10 +78,11 @@ export class PersonalNumberValidator {
   }
 
   /**
+   * Validates if the provided month matches the month part of the given date object.
    *
-   * @param month
-   * @param date
-   * @param year
+   * @param {string} month - The month extracted from the personal number.
+   * @param {Date} date - The Date object created from the personal number.
+   * @returns {boolean} Returns true if the month matches, otherwise false.
    */
   #validateMonth (month, date) {
     if (date.getMonth() + 1 === parseInt(month)) {
@@ -89,10 +92,11 @@ export class PersonalNumberValidator {
   }
 
   /**
+   * Validates if the provided year matches the day part of the given date object.
    *
-   * @param day
-   * @param date
-   * @param year
+   * @param {string} day - The day extracted from the personal number.
+   * @param {Date} date - The Date object created from the personal number.
+   * @returns {boolean} Returns true if the day matches, otherwise false.
    */
   #validateDay (day, date) {
     if (date.getDate() === parseInt(day)) {
@@ -102,8 +106,10 @@ export class PersonalNumberValidator {
   }
 
   /**
+   * Calculates the last digit of personal number using luhn algorithm.
    *
-   * @param personalNumber
+   * @param {string} personalNumber - The personal number string to validate using the Luhn algorithm.
+   * @returns {number} The calculated Luhn digit.
    */
   // https://en.wikipedia.org/wiki/Luhn_algorithm
   luhnAlgorithm (personalNumber) {
