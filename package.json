@@ -5,9 +5,6 @@
   "type": "module",
   "browser": "src/js/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
     "lint": "npx eslint ./src || exit 0",
     "lint:fix": "npx eslint ./src --fix || exit 0",
     "test": "npx --node-options=--experimental-vm-modules jest  || exit 0"
@@ -16,7 +13,6 @@
   "private": true,
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.10",
-    "jest": "^30.1.3",
-    "vite": "^6.3.5"
+    "jest": "^30.1.3"
   }
 }

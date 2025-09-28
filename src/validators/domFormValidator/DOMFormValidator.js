@@ -1,4 +1,4 @@
-import { createResult } from '../../middleWare/middleWare'
+import { createResult } from '../../middleWare/middleWare.js'
 /**
  *
  */
@@ -22,7 +22,7 @@ export class DOMFormValidator {
    *
    * @returns {{valid: boolean, message: string}} The validation result object.
    */
-  radioChecker () {
+  radioButton () {
     const radios = document.querySelectorAll('input[type="radio"]')
     const valid = [...radios].some(radio => radio.checked)
     return createResult(valid, valid ? 'Radiobutton is selected' : 'Radiobutton is not selected')

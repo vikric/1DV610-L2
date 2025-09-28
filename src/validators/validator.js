@@ -1,6 +1,6 @@
 import { EmailValidator } from './EmailValidator/emailValidator.js'
 import { FormValidator } from './formValidator/formValidator.js'
-import { PhoneNrValidator } from './phoneNrValidator/phoneNrValidator.js'
+import { PhoneNumberValidator } from './phoneNumberValidator/phoneNumberValidator.js'
 import { PersonalNumberValidator } from './personNumberValidator/personalNumberValidator.js'
 import { PasswordValidator } from './passwordValidator/passwordValidator.js'
 import { DOMFormValidator } from './domFormValidator/DOMFormValidator.js'
@@ -15,7 +15,7 @@ export class Validator {
   constructor () {
     this.formValidator = new FormValidator()
     this.emailValidator = new EmailValidator()
-    this.phoneNrValidator = new PhoneNrValidator()
+    this.phoneNrValidator = new PhoneNumberValidator()
     this.personalNumberValidator = new PersonalNumberValidator()
     this.passwordValidator = new PasswordValidator()
     this.domFormValidator = new DOMFormValidator()
@@ -29,7 +29,6 @@ export class Validator {
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
   validateInput (type, input) {
-    console.log(type, input)
     switch (type) {
       case 'text':
       case 'search':
@@ -43,13 +42,13 @@ export class Validator {
 
       case 'number':
       case 'tel':
-        return this.validateNumber(input)
+        return this.validatePhoneNumber(input)
 
       case 'checkbox':
-        return this.validateCheckbox(input)
+        return this.validateCheckbox()
 
       case 'radio':
-        return this.validateRadio(input)
+        return this.validateRadio()
     }
   }
 
@@ -74,7 +73,7 @@ export class Validator {
    * @param {number} number - The number to validate.
    * @returns {boolean} Returns true if the phone number is valid, otherwise false.
    */
-  validateNumber (number) {
+  validatePhoneNumber (number) {
     try {
       return this.phoneNrValidator.validatePhoneNumber(number)
     } catch (e) {
@@ -86,7 +85,6 @@ export class Validator {
   /**
    * Validates the provided checkboxes.
    *
-   * @param input
    * @returns {boolean} Returns true if a checkbox is selected, otherwise false.
    */
   validateCheckbox () {
@@ -99,7 +97,7 @@ export class Validator {
    * @returns {boolean} Returns true if a radio button is selected, otherwise false.
    */
   validateRadio () {
-    return this.domFormValidator.radioChecker()
+    return this.domFormValidator.radioButton()
   }
 
   /**
@@ -110,12 +108,14 @@ export class Validator {
    * @returns {boolean} Returns true if the password meets the requirements, otherwise false.
    */
   validatePassword (password, minlength = 8) {
-    return this.passwordValidator.checkPassword(password, minlength)
+    return this.passwordValidator.validatePassword(password, minlength)
   }
 
   /**
+   * Validates the provided personal number.
    *
-   * @param personalNumber
+   * @param {string|number} personalNumber The personal number to validate.
+   * @returns {boolean} Returns true if the personal number is valid, otherwise false.
    */
   validatePersonalNumber (personalNumber) {
     return this.personalNumberValidator.validatePersonalNumber(personalNumber)

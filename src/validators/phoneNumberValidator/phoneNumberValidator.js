@@ -3,7 +3,7 @@ import { createResult, validateType } from '../../middleWare/middleWare.js'
 /**
  *
  */
-export class PhoneNrValidator {
+export class PhoneNumberValidator {
   /**
    * Validates the phone number.
    *
