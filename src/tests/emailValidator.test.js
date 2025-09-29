@@ -1,4 +1,4 @@
-import { EmailValidator } from '../validators/EmailValidator/emailValidator.js'
+import { EmailValidator } from '../validators/emailValidator/emailValidator.js'
 
 const validator = new EmailValidator()
 

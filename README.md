@@ -1,14 +1,6 @@
 # 1DV610-L2
 
 
-## Todo
-Email 
-Date-format
-Passwords
-
-PersonalNumber
-userNames
-
 ## Reflektion
 Skriv en kortare reflektion (halv sida 12pt) där du beskriver dina erfarenheter från din egen kodkvalitet. Använd begrepp från boken.
 

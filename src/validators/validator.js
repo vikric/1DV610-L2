@@ -1,4 +1,4 @@
-import { EmailValidator } from './EmailValidator/emailValidator.js'
+import { EmailValidator } from './emailValidator/emailValidator.js'
 import { FormValidator } from './formValidator/formValidator.js'
 import { PhoneNumberValidator } from './phoneNumberValidator/phoneNumberValidator.js'
 import { PersonalNumberValidator } from './personNumberValidator/personalNumberValidator.js'

@@ -13,13 +13,6 @@ export function createResult (valid, message) {
 }
 
 /**
- * Throw an error if HTML element is missing.
- */
-export function missingInputSendError () {
-  throw new Error('Missing htmlElement')
-}
-
-/**
  * Throws a TypeError when a required value is missing.
  */
 export function missingValue () {
