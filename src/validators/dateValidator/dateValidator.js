@@ -16,9 +16,9 @@ export class DateValidator {
     }
     validateType(dateStr)
 
-    const dateObj = this.regexTester(dateStr)
+    const dateObj = this.#regexTester(dateStr)
 
-    dateObj.year = this.centuryChecker(dateObj.year)
+    dateObj.year = this.#centuryChecker(dateObj.year)
     const date = new Date(dateObj.year, dateObj.month - 1, dateObj.day)
 
     const valid =
@@ -35,7 +35,7 @@ export class DateValidator {
    * @param {string} dateStr - The date string to test and parse.
    * @returns {{year: number, month: number, day: number}} An object containing year, month, and day as numbers.
    */
-  regexTester (dateStr) {
+  #regexTester (dateStr) {
     let year = ''
     let month = ''
     let day = ''
@@ -55,7 +55,7 @@ export class DateValidator {
    * @param {number} year - The year number to test
    * @returns {year} Returns number with 4 digits.
    */
-  centuryChecker (year) {
+  #centuryChecker (year) {
     if (year < 1000) {
       year = +2000
     }

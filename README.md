@@ -11,9 +11,8 @@ A module for validating multiple inputs.
 - Swedish personalnumbers  
   There is also a form validator & DomForm validator so you can validate HTML element inputs.
 
-  ## Installation Guide
+## Installation Guide
 
--
  ```
  git clone https://github.com/vikric/1DV610-L2.git
  ```
@@ -27,7 +26,7 @@ npm install
 
 ## How it works
 
-There are 7 subclasses with 1 wrapper class. This wrapper class is the only one you need to use. The public methods you can use are:
+There are 7 subclasses with 1 wrapper class. The wrapper class is the only one you need to use. The public methods you can use are:
 
 ### General validator
 - **validateInput** (type, input)   
@@ -53,7 +52,7 @@ Checks to see if radiobutton has been ticked.
   
 ## How to use
 
-Here is 1 pictures to show you how to call the module. You can find this in the testApp which you can find in src/test/testApp
+Here is pictures to show you how to call the module and the result. You can find this in the testApp which you can find in src/test/testApp
 
 ``` js
 import { Validator } from '../../validators/validator.js'

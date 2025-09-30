@@ -26,7 +26,10 @@ In the class called **DOMFormValidator** you have 2 methods that have been teste
 **checkBoxChecker** - Checks to see if any of the provided checkboxes are ticked.  
 **radioButton** Checks to see if any of the provided radiobuttons are pressed.
 
-If you want to run these tests yourself, open src/tests/index.html in a webbrowser. Click on the checkboxes and radiobuttons so you can see what happens. In validationsReult.js you'll see how it's implemented.
-
-
+If you want to run these tests yourself. Open the project and type the following in the terminal:
+ ```
+ npm run test
+ ```
+ To run the manual DOM form test:
+ Open src/tests/index.html in a webbrowser. Click on the checkboxes and radiobuttons so you can see what happens. In validationsReult.js you'll see how it's implemented.
 
