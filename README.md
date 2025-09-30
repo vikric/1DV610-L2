@@ -1,21 +1,114 @@
-# 1DV610-L2
+# Validation Module
 
 
-## Reflektion
-Skriv en kortare reflektion (halv sida 12pt) där du beskriver dina erfarenheter från din egen kodkvalitet. Använd begrepp från boken.
+## Description
+A module for validating multiple inputs.
 
-Totalt är det 5st reflektioner som ska skrivas:
+- Dates
+- Emailaddresses
+- Passwords
+- Swedish phonenumbers
+- Swedish personalnumbers  
+  There is also a form validator & DomForm validator so you can validate HTML element inputs.
 
-Tabellreflektion för namnginving
-Kapitelreflektion kap 2
-Tabellreflektion för funktioner/metoder
-Kapitelreflektion kap 3
-Reflektion över egen kodkvalitet
+  ## Installation Guide
 
-## En ungefärlig storleksangivelse för er modul (Test-App ingår ej i detta):
+-
+ ```
+ git clone https://github.com/vikric/1DV610-L2.git
+ ```
+```
+cd 1DV610-L2
+```
 
-Minst 5 meningsfulla klasser/metoder/funktioner i det publika interfacet
-Minst 10 kontrollsatser(if, for, while) som används för att lösa huvudproblemet
-Minst 200 rader egen kod som används för att lösa huvudproblemet
-Undvik att mappa eller översätta existerande bibliotek
-Tillräckligt för att uppfylla kodkvalitetskrav, se egna rubriker.
+``` 
+npm install
+```
+
+## How it works
+
+There are 7 subclasses with 1 wrapper class. This wrapper class is the only one you need to use. The public methods you can use are:
+
+### General validator
+- **validateInput** (type, input)   
+Takes a type, for example text, email or checkbox and then a input. Depending what type a different validation method is called.
+
+### Specific validators
+- **validateEmail (email)**  
+Checks to see if emailadress has correct format
+- **validatePhoneNumber (number)**  
+Checks to see if phonenumber has correct format
+- **validatePassword (password, minlength = 8)**  
+Validates to see if password has atleast 2 uppercase, letters, 2 lowercase letters, 2 digits and the minLength you set
+- **validatePersonalNumber (personalNumber)**  
+Validates to see if entered string is a correct swedish personal number.
+- **validateDate (dateStr)**  
+  Validates to see if entered string is a correct date.
+
+  ### DOM validators
+- **validateCheckbox ()**  
+Checks to see checkbox has been checked.
+- **validateRadio ()**  
+Checks to see if radiobutton has been ticked.
+  
+## How to use
+
+Here is 1 pictures to show you how to call the module. You can find this in the testApp which you can find in src/test/testApp
+
+``` js
+import { Validator } from '../../validators/validator.js'
+document.addEventListener('DOMContentLoaded', () => {
+  const fields = document.querySelectorAll('.field')
+  fields.forEach(field => {
+    const validator = new Validator()
+
+    const button = field.querySelector('button')
+    const input = field.querySelector('input, textarea, select')
+    const result = field.querySelector('.result')
+
+    button.addEventListener('click', async () => {
+      if (!input) return
+      try {
+        const validation = validator.validateInput(input.type, input.value)
+
+        const email = validator.validateEmail('test@test.se') 
+        console.log(email)
+
+        const phoneNumber = validator.validatePhoneNumber('070 123 45 78')
+        console.log(phoneNumber)
+
+        const password = validator.validatePassword('PassWord123', 8)
+        console.log(password)
+
+        const personalNumber = validator.validatePersonalNumber('1212121212')
+        console.log(personalNumber)
+
+        const date = validator.validateDate('2023-12-28')
+        console.log(date)
+
+        const checkbox = validator.validateCheckbox(input.value)
+        console.log(checkbox)
+
+        const radio = validator.validateRadio(input.value)
+        console.log(radio)
+
+        result.textContent = validation.message
+      } catch (err) {
+        console.error('Validation failed:', err.message)
+      }
+    })
+  })
+})
+```
+
+![alt text](./src/images/logs.png)
+
+## Testing
+
+Most of the test classes have been tested using unit tests with Jest. You run them by typing 
+```
+npm run test
+``` 
+You can read more about testing here  
+https://github.com/vikric/1DV610-L2/blob/main/testrapport.md
+

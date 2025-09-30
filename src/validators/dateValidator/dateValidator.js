@@ -5,8 +5,10 @@ import { createResult, validateType } from '../../middleWare/middleWare.js'
  */
 export class DateValidator {
   /**
+   * Validates a date string and checks if it is a valid date.
    *
-   * @param dateStr
+   * @param {string} dateStr - The date string to validate.
+   * @returns {object} The result object indicating if the date is valid and a message.
    */
   validateDate (dateStr) {
     if (!dateStr) {
@@ -14,37 +16,24 @@ export class DateValidator {
     }
     validateType(dateStr)
 
-    /*     let year = ''
-    let month = ''
-    let day = ''
-    const stnDateRegex = /\d{4}-\d{2}-\d{2}/
-    const altDateRegex = /\d{1,2}\/\d{1,2}\/\d{2,4}/
+    const dateObj = this.regexTester(dateStr)
 
-    if (stnDateRegex.test(dateStr)) {
-      [year, month, day] = dateStr.split('-').map(Number)
-    } else if (altDateRegex.test(dateStr)) {
-      [day, month, year] = dateStr.split('/').map(Number)
-    } */
-    const tester = this.regexTester(dateStr)
-    console.log(tester)
-    if (tester.year < 100) {
-      tester.year = +2000
-    }
-    console.log(tester.year)
-
-    const date = new Date(tester.year, month - 1, day)
+    dateObj.year = this.centuryChecker(dateObj.year)
+    const date = new Date(dateObj.year, dateObj.month - 1, dateObj.day)
 
     const valid =
-    date.getFullYear() === (year) &&
-    date.getMonth() + 1 === (month) &&
-    date.getDate() === (day)
+    date.getFullYear() === (dateObj.year) &&
+    date.getMonth() + 1 === (dateObj.month) &&
+    date.getDate() === (dateObj.day)
 
     return createResult(valid, valid ? 'Date is valid' : 'Date is invalid')
   }
 
   /**
+   * Tests the date string and extracts year, month, and day components.
    *
-   * @param dateStr
+   * @param {string} dateStr - The date string to test and parse.
+   * @returns {{year: number, month: number, day: number}} An object containing year, month, and day as numbers.
    */
   regexTester (dateStr) {
     let year = ''
@@ -58,5 +47,18 @@ export class DateValidator {
       [day, month, year] = dateStr.split('/').map(Number)
     }
     return { year, month, day }
+  }
+
+  /**
+   * Checks if year is with 2 digits and returns it with 4.
+   *
+   * @param {number} year - The year number to test
+   * @returns {year} Returns number with 4 digits.
+   */
+  centuryChecker (year) {
+    if (year < 1000) {
+      year = +2000
+    }
+    return year
   }
 }

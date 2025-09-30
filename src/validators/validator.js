@@ -114,8 +114,10 @@ export class Validator {
   }
 
   /**
+   * Validates the provided date string.
    *
-   * @param dateStr
+   * @param {string} dateStr The date string to validate.
+   * @returns {boolean} Returns true if the date is valid, otherwise false.
    */
   validateDate (dateStr) {
     return this.DateValidator.validateDate(dateStr)

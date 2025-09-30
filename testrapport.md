@@ -2,7 +2,9 @@
 
 My module has been tested using Jest for all public methods, except DOM-specific methods which were tested manually in a browser. Automated tests cover input validation with both correct, incorrect values and no values. Manual tests verify interactive HTML form elements behave as expected.
 
-If you want to run these tests yourself, open this project and type "npm run test" in the terminal.
+![alt text](src/images/tests.png)
+
+![alt text](src/images/html.png)
 
 In these table you'll see the public methods in the classes that are used and what the outcome will be with the example data.
 
@@ -13,8 +15,10 @@ In these table you'll see the public methods in the classes that are used and wh
 | passwordValidator     | validatePassword         | validatePassword(Kalle)               | False  |
 | personNumberValidator | validatePersonalNumber   | validatePersonalNumber("1212121212")  | True   |
 | phoneNrValidator      | validatePhoneNumber      | validatePhoneNumber("070 123 12 34")  | True   |
+| dateValidator      |  validateDate    | validatePhoneNumber("2025-09-30")  | True   |
 
-![alt text](./images/image.png)
+
+
 
 ---
 In the class called **DOMFormValidator** you have 2 methods that have been tested manually. These take data from htmlElement which is the reason they are tested manually instead of with Jest.
