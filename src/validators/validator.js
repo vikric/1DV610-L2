@@ -4,6 +4,7 @@ import { PhoneNumberValidator } from './phoneNumberValidator/phoneNumberValidato
 import { PersonalNumberValidator } from './personNumberValidator/personalNumberValidator.js'
 import { PasswordValidator } from './passwordValidator/passwordValidator.js'
 import { DOMFormValidator } from './domFormValidator/DOMFormValidator.js'
+import { DateValidator } from './dateValidator/dateValidator.js'
 /**
  *
  */
@@ -13,6 +14,7 @@ export class Validator {
    *
    */
   constructor () {
+    this.DateValidator = new DateValidator()
     this.formValidator = new FormValidator()
     this.emailValidator = new EmailValidator()
     this.phoneNrValidator = new PhoneNumberValidator()
@@ -59,12 +61,7 @@ export class Validator {
    * @returns {boolean} Returns true if the email is valid, otherwise false.
    */
   validateEmail (email) {
-    try {
-      return this.emailValidator.validateEmail(email)
-    } catch (e) {
-      console.error(e)
-      return false
-    }
+    return this.emailValidator.validateEmail(email)
   }
 
   /**
@@ -74,12 +71,7 @@ export class Validator {
    * @returns {boolean} Returns true if the phone number is valid, otherwise false.
    */
   validatePhoneNumber (number) {
-    try {
-      return this.phoneNrValidator.validatePhoneNumber(number)
-    } catch (e) {
-      console.error(e)
-      return false
-    }
+    return this.phoneNrValidator.validatePhoneNumber(number)
   }
 
   /**
@@ -119,5 +111,13 @@ export class Validator {
    */
   validatePersonalNumber (personalNumber) {
     return this.personalNumberValidator.validatePersonalNumber(personalNumber)
+  }
+
+  /**
+   *
+   * @param dateStr
+   */
+  validateDate (dateStr) {
+    return this.DateValidator.validateDate(dateStr)
   }
 }

@@ -28,10 +28,14 @@ export class PersonalNumberValidator {
    * @returns {object} The result object indicating if the personal number is valid and a message.
    */
   validatePersonalNumber (personalNumber) {
+    if (!personalNumber) {
+      return createResult(false, 'No personal number provided length')
+    }
+
     personalNumber = this.#removeCentury(personalNumber)
 
     if (!personalNumber) {
-      return createResult(false, 'Invalid length')
+      return createResult(false, 'Invalid length of personal number')
     }
 
     const validBirthDate = this.#validDate(personalNumber)
@@ -71,10 +75,9 @@ export class PersonalNumberValidator {
    * @returns {boolean} Returns true if the year matches, otherwise false.
    */
   #validateYear (year, date) {
-    if (date.getYear() === parseInt(year)) {
-      return true
-    }
-    return false
+    const shortYear = date.getFullYear() % 100
+
+    return (shortYear === parseInt(year))
   }
 
   /**

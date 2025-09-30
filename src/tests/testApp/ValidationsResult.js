@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', async () => {
       if (!input) return
-      const validation = validator.validateInput(input.type, input.value)
-      console.log(validator.validatePersonalNumber('1212121212'))
-
-      result.textContent = validation.message
+      try {
+        const validation = validator.validateInput(input.type, input.value)
+        console.log(validator.validatePersonalNumber('1212121212'))
+        validator.validateDate('2023-12-28')
+        result.textContent = validation.message
+      } catch (err) {
+        console.error('Validation failed:', err.message)
+      }
     })
   })
 })
