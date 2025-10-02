@@ -16,10 +16,16 @@ export class PhoneNumberValidator {
     }
     validateType(phoneNumber)
 
-    const digitsOnly = phoneNumber.replaceAll('-', '').replaceAll(' ', '')
-    if (!digitsOnly) return createResult(false, 'Invalid number entered')
+    const digits = /[0-9]/
+    const regex = /\d/
+    const digitsOnly = regex.exec(phoneNumber)
+    console.log(digitsOnly.input)
+    console.log(digitsOnly.length)
+    console.log(digitsOnly.input.length)
+    /*     const digitsOnly = phoneNumber.replaceAll('-', '').replaceAll(' ', '')
+ */ if (!digitsOnly) return createResult(false, 'Invalid length on number')
 
-    const startDigits = digitsOnly.substring(0, 2)
+    const startDigits = digitsOnly.toString().substring(0, 2)
     const valid =
       (startDigits === '46' && digitsOnly.length === 11) ||
       (startDigits === '07' && digitsOnly.length === 10)

@@ -1,4 +1,4 @@
-import { Validator } from '../../validators/validator.js'
+import { Validator } from '../../validator.js'
 document.addEventListener('DOMContentLoaded', () => {
   const fields = document.querySelectorAll('.field')
   fields.forEach(field => {

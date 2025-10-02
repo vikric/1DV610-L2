@@ -32,15 +32,15 @@ export class PersonalNumberValidator {
       return createResult(false, 'No personal number provided length')
     }
 
-    personalNumber = this.#removeCentury(personalNumber)
+    const shortedPersonalNumber = this.#removeCentury(personalNumber)
 
-    if (!personalNumber) {
+    if (!shortedPersonalNumber) {
       return createResult(false, 'Invalid length of personal number')
     }
 
-    const validBirthDate = this.#validDate(personalNumber)
-    const lastDigit = parseInt(personalNumber.at(-1))
-    const luhnDigit = this.luhnAlgorithm(personalNumber)
+    const validBirthDate = this.#validDate(shortedPersonalNumber)
+    const lastDigit = parseInt(shortedPersonalNumber.at(-1))
+    const luhnDigit = this.luhnAlgorithm(shortedPersonalNumber)
 
     if (validBirthDate && lastDigit === luhnDigit) {
       return createResult(true, 'Valid personalnumber provided')
