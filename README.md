@@ -100,8 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 ```
 
-![alt text](./src/images/logs.png)
-
 ## Testing
 
 Most of the test classes have been tested using unit tests with Jest. You run them by typing 

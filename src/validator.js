@@ -1,10 +1,10 @@
-import { EmailValidator } from './emailValidator/emailValidator.js'
-import { FormValidator } from './formValidator/formValidator.js'
-import { PhoneNumberValidator } from './phoneNumberValidator/phoneNumberValidator.js'
-import { PersonalNumberValidator } from './personNumberValidator/personalNumberValidator.js'
-import { PasswordValidator } from './passwordValidator/passwordValidator.js'
-import { DOMFormValidator } from './domFormValidator/DOMFormValidator.js'
-import { DateValidator } from './dateValidator/dateValidator.js'
+import { EmailValidator } from './validators/emailValidator/emailValidator.js'
+import { FormValidator } from './validators/formValidator/formValidator.js'
+import { PhoneNumberValidator } from './validators/phoneNumberValidator/phoneNumberValidator.js'
+import { PersonalNumberValidator } from './validators/personNumberValidator/personalNumberValidator.js'
+import { PasswordValidator } from './validators/passwordValidator.js'
+import { DOMFormValidator } from './validators/DOMFormValidator.js'
+import { DateValidator } from './validators/dateValidator.js'
 /**
  *
  */

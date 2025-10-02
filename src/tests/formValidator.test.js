@@ -1,4 +1,4 @@
-import { FormValidator } from '../validators/formValidator/formValidator.js'
+import { FormValidator } from '../validators/formValidator.js'
 
 const validator = new FormValidator()
 

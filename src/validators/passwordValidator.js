@@ -1,4 +1,4 @@
-import { createResult, validateType } from '../../middleWare/middleWare.js'
+import { createResult, validateType } from '../middleWare/middleWare.js'
 
 /**
  *

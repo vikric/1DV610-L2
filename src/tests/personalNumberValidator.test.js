@@ -1,4 +1,4 @@
-import { PersonalNumberValidator } from '../validators/personNumberValidator/personalNumberValidator.js'
+import { PersonalNumberValidator } from '../validators/personalNumberValidator.js'
 
 const validator = new PersonalNumberValidator()
 

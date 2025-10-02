@@ -1,4 +1,4 @@
-import { DateValidator } from '../validators/dateValidator/dateValidator.js'
+import { DateValidator } from '../validators/dateValidator.js'
 
 const validator = new DateValidator()
 
