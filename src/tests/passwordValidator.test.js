@@ -11,7 +11,7 @@ test('returns valid when password has correct length', () => {
 test('returns false when password doesnt meet requirements', () => {
   const result = validator.validatePassword('Kalle', 6)
   expect(result.valid).toBe(false)
-  expect(result.message).toBe('❌ Password doesnt meet the rquirements')
+  expect(result.message).toBe('❌ Password doesnt meet the requirements')
 })
 
 test('returns false when password is not provided', () => {

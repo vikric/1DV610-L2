@@ -1,4 +1,8 @@
-import { createResult } from '../middleWare/middleWare.js'
+import {
+  validateStringType,
+  createInvalidMessage,
+  createValidMessage,
+} from "../middleWare/middleWare.js";
 /**
  *
  */
@@ -9,16 +13,16 @@ export class PersonalNumberValidator {
    * @param {string} personalNumber - The personal number to be validated and possibly trimmed.
    * @returns {(string|boolean)} Returns the trimmed personal number if valid, otherwise false.
    */
-  #removeCentury (personalNumber) {
+  #removeCentury(personalNumber) {
     if (personalNumber.length === 12) {
-      personalNumber = personalNumber.substring(2)
+      personalNumber = personalNumber.substring(2);
     }
 
     if (personalNumber.length !== 10) {
-      return false
+      return false;
     }
 
-    return personalNumber
+    return personalNumber;
   }
 
   /**
@@ -27,26 +31,27 @@ export class PersonalNumberValidator {
    * @param {string} personalNumber - The personal number to validate.
    * @returns {object} The result object indicating if the personal number is valid and a message.
    */
-  validatePersonalNumber (personalNumber) {
+  validatePersonalNumber(personalNumber) {
     if (!personalNumber) {
-      return createResult(false, 'No personal number provided length')
+      return createInvalidMessage("No personal number provided length");
     }
+    validateStringType(personalNumber);
 
-    const shortedPersonalNumber = this.#removeCentury(personalNumber)
+    const shortedPersonalNumber = this.#removeCentury(personalNumber);
 
     if (!shortedPersonalNumber) {
-      return createResult(false, 'Invalid length of personal number')
+      return createInvalidMessage("Invalid length of personal number");
     }
 
-    const validBirthDate = this.#validDate(shortedPersonalNumber)
-    const lastDigit = parseInt(shortedPersonalNumber.at(-1))
-    const luhnDigit = this.luhnAlgorithm(shortedPersonalNumber)
+    const validBirthDate = this.#validDate(shortedPersonalNumber);
+    const lastDigit = parseInt(shortedPersonalNumber.at(-1));
+    const luhnDigit = this.luhnAlgorithm(shortedPersonalNumber);
 
     if (validBirthDate && lastDigit === luhnDigit) {
-      return createResult(true, 'Valid personalnumber provided')
+      return createValidMessage("Valid personalnumber provided");
     }
 
-    return createResult(false, 'Invalid personalnumber provided')
+    return createInvalidMessage("Invalid personalnumber provided");
   }
 
   /**
@@ -55,16 +60,16 @@ export class PersonalNumberValidator {
    * @param {string} personalNumber - The personal number string to extract and validate the date from.
    * @returns {boolean} Returns true if the date is valid, otherwise false.
    */
-  #validDate (personalNumber) {
-    const year = personalNumber.substring(0, 2)
-    const month = personalNumber.substring(2, 4)
-    const day = personalNumber.substring(4, 6)
+  #validDate(personalNumber) {
+    const year = personalNumber.substring(0, 2);
+    const month = personalNumber.substring(2, 4);
+    const day = personalNumber.substring(4, 6);
 
-    const date = new Date(year, month - 1, day)
-    const validYear = this.#validateYear(year, date)
-    const validMonth = this.#validateMonth(month, date)
-    const validDay = this.#validateDay(day, date)
-    return validYear && validMonth && validDay
+    const date = new Date(year, month - 1, day);
+    const validYear = this.#validateYear(year, date);
+    const validMonth = this.#validateMonth(month, date);
+    const validDay = this.#validateDay(day, date);
+    return validYear && validMonth && validDay;
   }
 
   /**
@@ -74,10 +79,10 @@ export class PersonalNumberValidator {
    * @param {Date} date - The Date object created from the personal number.
    * @returns {boolean} Returns true if the year matches, otherwise false.
    */
-  #validateYear (year, date) {
-    const shortYear = date.getFullYear() % 100
+  #validateYear(year, date) {
+    const shortYear = date.getFullYear() % 100;
 
-    return (shortYear === parseInt(year))
+    return shortYear === parseInt(year);
   }
 
   /**
@@ -87,11 +92,11 @@ export class PersonalNumberValidator {
    * @param {Date} date - The Date object created from the personal number.
    * @returns {boolean} Returns true if the month matches, otherwise false.
    */
-  #validateMonth (month, date) {
+  #validateMonth(month, date) {
     if (date.getMonth() + 1 === parseInt(month)) {
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
   /**
@@ -101,11 +106,11 @@ export class PersonalNumberValidator {
    * @param {Date} date - The Date object created from the personal number.
    * @returns {boolean} Returns true if the day matches, otherwise false.
    */
-  #validateDay (day, date) {
+  #validateDay(day, date) {
     if (date.getDate() === parseInt(day)) {
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
   /**
@@ -115,19 +120,19 @@ export class PersonalNumberValidator {
    * @returns {number} The calculated Luhn digit.
    */
   // https://en.wikipedia.org/wiki/Luhn_algorithm
-  luhnAlgorithm (personalNumber) {
-    let totalNumber = 0
+  luhnAlgorithm(personalNumber) {
+    let totalNumber = 0;
     for (let i = 0; i < personalNumber.length - 1; i++) {
-      let digit = parseInt(personalNumber[i])
+      let digit = parseInt(personalNumber[i]);
 
       if (i % 2 === 0) {
-        digit *= 2
+        digit *= 2;
         if (digit > 9) {
-          digit = Math.floor(digit / 10) + (digit % 10)
+          digit = Math.floor(digit / 10) + (digit % 10);
         }
       }
-      totalNumber += digit
+      totalNumber += digit;
     }
-    return (10 - (totalNumber % 10)) % 10
+    return (10 - (totalNumber % 10)) % 10;
   }
 }

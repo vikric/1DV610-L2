@@ -1,22 +1,27 @@
 /**
- * Creates a result object indicating validity and a formatted message.
+ * Creates an object indicating a sucesss and a formatted message.
  *
- * @param {boolean} valid - Indicates if the result is valid.
  * @param {string} message - The message to display.
  * @returns {{valid: boolean, message: string}} The result object with validity and formatted message.
  */
-export function createResult (valid, message) {
+export function createValidMessage(message) {
   return {
-    valid,
-    message: valid ? `✅ ${message}` : `❌ ${message}`
-  }
+    valid: true,
+    message: `✅ ${message}`,
+  };
 }
 
 /**
- * Throws a TypeError when a required value is missing.
+ * Creates an object indicating validity and a formatted message.
+ *
+ * @param {string} message - The message to display.
+ * @returns {{valid: boolean, message: string}} The result object with validity and formatted message.
  */
-export function missingValue () {
-  throw new Error('Missing Value')
+export function createInvalidMessage(message) {
+  return {
+    valid: false,
+    message: `❌ ${message}`,
+  };
 }
 
 /**
@@ -24,11 +29,11 @@ export function missingValue () {
  *
  * @param {any} input - The value to validate.
  */
-export function validateType (input) {
+export function validateStringType(input) {
   switch (typeof input) {
-    case 'string':
-      break
-    default :
-      throw new TypeError('Must be a string')
+    case "string":
+      break;
+    default:
+      throw new TypeError("Must be a string");
   }
 }

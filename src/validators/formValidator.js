@@ -1,4 +1,8 @@
-import { createResult, validateType } from '../middleWare/middleWare.js'
+import {
+  validateStringType,
+  createValidMessage,
+  createInvalidMessage,
+} from "../middleWare/middleWare.js";
 
 /**
  *
@@ -10,12 +14,14 @@ export class FormValidator {
    * @param {string} input - The input value to check for emptiness.
    * @returns {{valid: boolean, message: string}} The validation result object.
    */
-  isNotEmpty (input) {
+  isNotEmpty(input) {
     if (!input) {
-      return createResult(false, 'Input is empty')
+      return createInvalidMessage("Input is empty");
     }
-    validateType(input)
-    const valid = input.trim().length > 0
-    return createResult(valid, valid ? 'Input is not empty' : 'Input is empty')
+    validateStringType(input);
+    const valid = input.trim().length > 0;
+    return valid
+      ? createValidMessage("Input is not empty")
+      : createInvalidMessage("Input is empty");
   }
 }

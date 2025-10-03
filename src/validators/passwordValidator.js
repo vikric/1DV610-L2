@@ -1,4 +1,8 @@
-import { createResult, validateType } from '../middleWare/middleWare.js'
+import {
+  validateStringType,
+  createInvalidMessage,
+  createValidMessage,
+} from "../middleWare/middleWare.js";
 
 /**
  *
@@ -11,35 +15,38 @@ export class PasswordValidator {
    * @param {number} [minlength = 8] - The minimum required length for the password.
    * @returns {object} Result object indicating if the password is valid and a message.
    */
-  validatePassword (password, minlength = 8) {
+  validatePassword(password, minlength = 8) {
     if (!password) {
-      return createResult(false, 'Password was not provided')
+      return createInvalidMessage("Password was not provided");
     }
-    validateType(password)
+    validateStringType(password);
 
-    const validLength = password.length >= minlength
-    const upperCase = /[A-Z]/
-    const lowerCase = /[a-z]/
-    const digits = /[0-9]/
-
-    let hasUpperCase = 0
-    let hasLowerCase = 0
-    let hasDigits = 0
+    const validLength = password.length >= minlength;
 
     if (validLength) {
-      for (const count of password) {
-        if (upperCase.test(count)) {
-          hasUpperCase++
-        } else if (lowerCase.test(count)) {
-          hasLowerCase++
-        } else if (digits.test(count)) {
-          hasDigits++
-        }
-      }
-      if (hasUpperCase > 1 && hasLowerCase > 1 && hasDigits > 1) {
-        return createResult(true, 'Password is valid')
-      }
+      return this.requirementsChecker(password);
     }
-    return createResult(false, 'Password doesnt meet the rquirements')
+    return createInvalidMessage("Password doesnt meet the requirements");
+  }
+
+  requirementsChecker(password) {
+    const counter = {
+      upperCase: 0,
+      lowerCase: 0,
+      digits: 0,
+    };
+
+    for (const char of password) {
+      counter.upperCase = password.match(/[A-Z]/g);
+      counter.lowerCase = password.match(/[a-z]/g);
+      counter.digits = password.match(/\d/g);
+
+      if (
+        counter.upperCase.length > 1 &&
+        counter.lowerCase.length > 1 &&
+        counter.digits.length > 1
+      )
+        return createValidMessage("Password is valid");
+    }
   }
 }

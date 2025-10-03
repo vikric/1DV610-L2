@@ -1,4 +1,9 @@
-import { createResult, validateType } from '../middleWare/middleWare.js'
+import {
+  validateStringType,
+  createValidMessage,
+  createInvalidMessage,
+} from "../middleWare/middleWare.js";
+
 /**
  *
  */
@@ -9,15 +14,17 @@ export class EmailValidator {
    * @param {string} email - The email address to validate.
    * @returns {string} 'Valid email' if the email is valid, otherwise 'Not valid email'.
    */
-  validateEmail (email) {
+  validateEmail(email) {
     if (!email) {
-      return createResult(false, 'Enter an emailaddress')
+      return createInvalidMessage("Enter an emailaddress");
     }
-    validateType(email)
+    validateStringType(email);
 
     // https://www.geeksforgeeks.org/javascript/how-to-validate-email-address-using-regexp-in-javascript/
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    const valid = regex.test((email))
-    return createResult(valid, valid ? 'Valid emailaddress' : 'Invalid emailaddress')
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const valid = regex.test(email);
+    return valid
+      ? createValidMessage("Valid emailaddress")
+      : createInvalidMessage("Invalid emailaddress");
   }
 }

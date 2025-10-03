@@ -1,4 +1,8 @@
-import { createResult, validateType } from '../middleWare/middleWare.js'
+import {
+  validateStringType,
+  createInvalidMessage,
+  createValidMessage,
+} from "../middleWare/middleWare.js";
 
 /**
  * Validates dates in string format.
@@ -10,23 +14,25 @@ export class DateValidator {
    * @param {string} dateStr - The date string to validate.
    * @returns {object} The result object indicating if the date is valid and a message.
    */
-  validateDate (dateStr) {
+  validateDate(dateStr) {
     if (!dateStr) {
-      return createResult(false, 'No date provided')
+      return createInvalidMessage("No date provided");
     }
-    validateType(dateStr)
+    validateStringType(dateStr);
 
-    const dateObj = this.#regexTester(dateStr)
+    const dateObj = this.#regexTester(dateStr);
 
-    dateObj.year = this.#centuryChecker(dateObj.year)
-    const date = new Date(dateObj.year, dateObj.month - 1, dateObj.day)
+    dateObj.year = this.#centuryChecker(dateObj.year);
+    const date = new Date(dateObj.year, dateObj.month - 1, dateObj.day);
 
     const valid =
-    date.getFullYear() === (dateObj.year) &&
-    date.getMonth() + 1 === (dateObj.month) &&
-    date.getDate() === (dateObj.day)
+      date.getFullYear() === dateObj.year &&
+      date.getMonth() + 1 === dateObj.month &&
+      date.getDate() === dateObj.day;
 
-    return createResult(valid, valid ? 'Date is valid' : 'Date is invalid')
+    return valid
+      ? createValidMessage("Date is valid")
+      : createInvalidMessage("Date is invalid");
   }
 
   /**
@@ -35,18 +41,18 @@ export class DateValidator {
    * @param {string} dateStr - The date string to test and parse.
    * @returns {{year: number, month: number, day: number}} An object containing year, month, and day as numbers.
    */
-  #regexTester (dateStr) {
-    let year = ''
-    let month = ''
-    let day = ''
-    const stnDateRegex = /\d{4}-\d{2}-\d{2}/
-    const altDateRegex = /\d{1,2}\/\d{1,2}\/\d{2,4}/
+  #regexTester(dateStr) {
+    let year = "";
+    let month = "";
+    let day = "";
+    const stnDateRegex = /\d{4}-\d{2}-\d{2}/;
+    const altDateRegex = /\d{1,2}\/\d{1,2}\/\d{2,4}/;
     if (stnDateRegex.test(dateStr)) {
-      [year, month, day] = dateStr.split('-').map(Number)
+      [year, month, day] = dateStr.split("-").map(Number);
     } else if (altDateRegex.test(dateStr)) {
-      [day, month, year] = dateStr.split('/').map(Number)
+      [day, month, year] = dateStr.split("/").map(Number);
     }
-    return { year, month, day }
+    return { year, month, day };
   }
 
   /**
@@ -55,10 +61,10 @@ export class DateValidator {
    * @param {number} year - The year number to test
    * @returns {year} Returns number with 4 digits.
    */
-  #centuryChecker (year) {
+  #centuryChecker(year) {
     if (year < 1000) {
-      year = +2000
+      year = +2000;
     }
-    return year
+    return year;
   }
 }
