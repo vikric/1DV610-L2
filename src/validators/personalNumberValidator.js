@@ -45,7 +45,7 @@ export class PersonalNumberValidator {
 
     const validBirthDate = this.#validDate(shortedPersonalNumber);
     const lastDigit = parseInt(shortedPersonalNumber.at(-1));
-    const luhnDigit = this.luhnAlgorithm(shortedPersonalNumber);
+    const luhnDigit = this.#luhnAlgorithm(shortedPersonalNumber);
 
     if (validBirthDate && lastDigit === luhnDigit) {
       return createValidMessage("Valid personalnumber provided");
@@ -120,7 +120,7 @@ export class PersonalNumberValidator {
    * @returns {number} The calculated Luhn digit.
    */
   // https://en.wikipedia.org/wiki/Luhn_algorithm
-  luhnAlgorithm(personalNumber) {
+  #luhnAlgorithm(personalNumber) {
     let totalNumber = 0;
     for (let i = 0; i < personalNumber.length - 1; i++) {
       let digit = parseInt(personalNumber[i]);

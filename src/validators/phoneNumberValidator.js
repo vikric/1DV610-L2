@@ -20,12 +20,12 @@ export class PhoneNumberValidator {
     }
     validateStringType(phoneNumber);
 
-    const digitsOnly = this.digitChecker(phoneNumber);
+    const digitsOnly = this.#digitChecker(phoneNumber);
     if (!digitsOnly) return createInvalidMessage("Invalid length on number");
 
-    const valid = this.sweDigitsChecker(digitsOnly);
+    const valid = this.#sweDigitsChecker(digitsOnly);
 
-    return this.validChecker(valid);
+    return this.#validChecker(valid);
   }
 
   /**
@@ -34,7 +34,7 @@ export class PhoneNumberValidator {
    * @param {string} phoneNumber - The phone number to check.
    * @returns {string} A string with only digits.
    */
-  digitChecker(phoneNumber) {
+  #digitChecker(phoneNumber) {
     // /\D/g Removes any non digit
     return phoneNumber.replaceAll(/\D/g, "");
   }
@@ -45,7 +45,7 @@ export class PhoneNumberValidator {
    * @param {string} digits - The digits to check.
    * @returns {Boolean}
    */
-  sweDigitsChecker(digits) {
+  #sweDigitsChecker(digits) {
     const startDigits = digits.toString().substring(0, 2);
     const valid =
       (startDigits === "46" && digits.length === 11) ||
@@ -53,7 +53,7 @@ export class PhoneNumberValidator {
     return valid;
   }
 
-  validChecker(valid) {
+  #validChecker(valid) {
     return valid
       ? createValidMessage("Valid number entered")
       : createInvalidMessage("Invalid number entered");

@@ -24,12 +24,12 @@ export class PasswordValidator {
     const validLength = password.length >= minlength;
 
     if (validLength) {
-      return this.requirementsChecker(password);
+      return this.#requirementsChecker(password);
     }
     return createInvalidMessage("Password doesnt meet the requirements");
   }
 
-  requirementsChecker(password) {
+  #requirementsChecker(password) {
     const counter = {
       upperCase: 0,
       lowerCase: 0,
