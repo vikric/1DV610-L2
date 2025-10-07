@@ -9,7 +9,20 @@ A module for validating multiple inputs.
 - Passwords
 - Swedish phonenumbers
 - Swedish personalnumbers  
-  There is also a form validator & DomForm validator so you can validate HTML element inputs.
+- There is also a form validator & DomForm validator so you can validate HTML element inputs.
+---
+  ```js
+  import { Validator } from "../../validator.js";
+  const validator = new Validator();
+
+  const correctFormatNumber = validator.validatePhoneNumber("070 123 45 78");
+  console.log(correctFormatNumber);
+
+  const incorrectFormatNumber = validator.validatePhoneNumber("70 123 45 78");
+  console.log(incorrectFormatNumber);
+
+  ```
+![alt text](src/images/console.logs.png)
 
 ## Installation Guide
 
