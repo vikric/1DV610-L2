@@ -59,7 +59,7 @@ export class Validator {
    * Validates the provided email address.
    *
    * @param {string} email The email address to validate.
-   * @returns {boolean} Returns true if the email is valid, otherwise false.
+   * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateEmail(email) {
     return this.emailValidator.validateEmail(email);
@@ -69,7 +69,7 @@ export class Validator {
    * Validates the provided phone number.
    *
    * @param {number} number - The number to validate.
-   * @returns {boolean} Returns true if the phone number is valid, otherwise false.
+   * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePhoneNumber(number) {
     return this.phoneNrValidator.validatePhoneNumber(number);
@@ -78,7 +78,7 @@ export class Validator {
   /**
    * Validates the provided checkboxes.
    *
-   * @returns {boolean} Returns true if a checkbox is selected, otherwise false.
+   * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateCheckbox() {
     return this.domFormValidator.checkBoxChecker();
@@ -87,7 +87,7 @@ export class Validator {
   /**
    * Validates the radio button selection.
    *
-   * @returns {boolean} Returns true if a radio button is selected, otherwise false.
+   * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateRadio() {
     return this.domFormValidator.radioButton();
@@ -98,7 +98,7 @@ export class Validator {
    *
    * @param {string} password The password string to validate.
    * @param {number} [minlength=8] The minimum length required for the password.
-   * @returns {boolean} Returns true if the password meets the requirements, otherwise false.
+   * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePassword(password, minlength = 8) {
     return this.passwordValidator.validatePassword(password, minlength);
@@ -108,7 +108,7 @@ export class Validator {
    * Validates the provided personal number.
    *
    * @param {string|number} personalNumber The personal number to validate.
-   * @returns {boolean} Returns true if the personal number is valid, otherwise false.
+   * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePersonalNumber(personalNumber) {
     return this.personalNumberValidator.validatePersonalNumber(personalNumber);
@@ -118,7 +118,7 @@ export class Validator {
    * Validates the provided date string.
    *
    * @param {string} dateStr The date string to validate.
-   * @returns {boolean} Returns true if the date is valid, otherwise false.
+   * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateDate(dateStr) {
     return this.DateValidator.validateDate(dateStr);
