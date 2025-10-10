@@ -1,6 +1,6 @@
 {
   "name": "validator-sv",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "1DV610 - Second assignment",
   "type": "module",
   "browser": "src/js/index.js",

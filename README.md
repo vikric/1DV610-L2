@@ -22,7 +22,7 @@ A module for validating multiple inputs.
   console.log(incorrectFormatNumber);
 
   ```
-![alt text](src/images/console.logs.png)
+![alt text](./src/images/console.logs.png)
 
 ## Installation Guide
 
