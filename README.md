@@ -22,7 +22,8 @@ A module for validating multiple inputs.
   console.log(incorrectFormatNumber);
 
   ```
-![alt text](./src/images/console.logs.png)
+![alt text](https://raw.githubusercontent.com/vikric/1DV610-L2/V1.1/src/images/console.logs.png)
+
 
 ## Installation Guide
 
