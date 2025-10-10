@@ -4,11 +4,11 @@
  * @param {string} message - The message to display.
  * @returns {{valid: boolean, message: string}} The result object with validity and formatted message.
  */
-export function createValidMessage(message) {
+export function createValidMessage (message) {
   return {
     valid: true,
-    message: `✅ ${message}`,
-  };
+    message: `✅ ${message}`
+  }
 }
 
 /**
@@ -17,11 +17,11 @@ export function createValidMessage(message) {
  * @param {string} message - The message to display.
  * @returns {{valid: boolean, message: string}} The result object with validity and formatted message.
  */
-export function createInvalidMessage(message) {
+export function createInvalidMessage (message) {
   return {
     valid: false,
-    message: `❌ ${message}`,
-  };
+    message: `❌ ${message}`
+  }
 }
 
 /**
@@ -29,11 +29,11 @@ export function createInvalidMessage(message) {
  *
  * @param {any} input - The value to validate.
  */
-export function checkIsString(input) {
+export function checkIsString (input) {
   switch (typeof input) {
-    case "string":
-      break;
+    case 'string':
+      break
     default:
-      throw new TypeError("Must be a string");
+      throw new TypeError('Must be a string')
   }
 }

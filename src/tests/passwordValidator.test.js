@@ -14,7 +14,6 @@ test('returns false when password is not long enough', () => {
   expect(result.message).toBe('❌ Password must be at least 8 characters long')
 })
 
-
 test('returns false when password doesnt meet requirements', () => {
   const result = validator.validatePasswordRequirements('Kalle', 6)
   expect(result.valid).toBe(false)

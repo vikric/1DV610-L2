@@ -1,6 +1,6 @@
 {
-  "name": "1dv610",
-  "version": "1.1.2",
+  "name": "validator-sv",
+  "version": "2.0.0",
   "description": "1DV610 - Second assignment",
   "type": "module",
   "browser": "src/js/index.js",
@@ -10,7 +10,7 @@
     "test": "npx --node-options=--experimental-vm-modules jest  || exit 0"
   },
   "license": "MIT",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.10",
     "jest": "^30.1.3"

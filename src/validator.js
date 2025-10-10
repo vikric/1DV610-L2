@@ -1,11 +1,10 @@
-import { EmailValidator } from "./validators/emailValidator.js";
-import { FormValidator } from "./validators/formValidator.js";
-import { PhoneNumberValidator } from "./validators/phoneNumberValidator.js";
-import { PersonalNumberValidator } from "./validators/personalNumberValidator.js";
-import { PasswordValidator } from "./validators/passwordValidator.js";
-import { DOMFormValidator } from "./validators/DOMFormValidator.js";
-import { DateValidator } from "./validators/dateValidator.js";
-import { checkIsString } from "./middleWare/middleWare.js";
+import { EmailValidator } from './validators/emailValidator.js'
+import { FormValidator } from './validators/formValidator.js'
+import { PhoneNumberValidator } from './validators/phoneNumberValidator.js'
+import { PersonalNumberValidator } from './validators/personalNumberValidator.js'
+import { PasswordValidator } from './validators/passwordValidator.js'
+import { DOMFormValidator } from './validators/DOMFormValidator.js'
+import { DateValidator } from './validators/dateValidator.js'
 /**
  *
  */
@@ -14,14 +13,14 @@ export class Validator {
    * Initializes the Validator with form, email, and phone number validators.
    *
    */
-  constructor() {
-    this.DateValidator = new DateValidator();
-    this.formValidator = new FormValidator();
-    this.emailValidator = new EmailValidator();
-    this.phoneNrValidator = new PhoneNumberValidator();
-    this.personalNumberValidator = new PersonalNumberValidator();
-    this.passwordValidator = new PasswordValidator();
-    this.domFormValidator = new DOMFormValidator();
+  constructor () {
+    this.DateValidator = new DateValidator()
+    this.formValidator = new FormValidator()
+    this.emailValidator = new EmailValidator()
+    this.phoneNrValidator = new PhoneNumberValidator()
+    this.personalNumberValidator = new PersonalNumberValidator()
+    this.passwordValidator = new PasswordValidator()
+    this.domFormValidator = new DOMFormValidator()
   }
 
   /**
@@ -31,27 +30,27 @@ export class Validator {
    * @param {*} input The value of the input element to validate.
    * @returns {boolean} Returns true if the input is valid, otherwise false.
    */
-  validateInput(type, input) {
+  validateInput (type, input) {
     switch (type) {
-      case "text":
-      case "search":
-      case "password":
-      case "time":
-      case "url":
-        return this.formValidator.isNotEmpty(input);
+      case 'text':
+      case 'search':
+      case 'password':
+      case 'time':
+      case 'url':
+        return this.formValidator.isNotEmpty(input)
 
-      case "email":
-        return this.validateEmail(input);
+      case 'email':
+        return this.validateEmail(input)
 
-      case "number":
-      case "tel":
-        return this.validatePhoneNumber(input);
+      case 'number':
+      case 'tel':
+        return this.validatePhoneNumber(input)
 
-      case "checkbox":
-        return this.validateCheckbox();
+      case 'checkbox':
+        return this.validateCheckbox()
 
-      case "radio":
-        return this.validateRadio();
+      case 'radio':
+        return this.validateRadio()
     }
   }
 
@@ -61,8 +60,8 @@ export class Validator {
    * @param {string} email The email address to validate.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validateEmail(email) {
-    return this.emailValidator.validateEmailAddress(email);
+  validateEmail (email) {
+    return this.emailValidator.validateEmailAddress(email)
   }
 
   /**
@@ -71,8 +70,8 @@ export class Validator {
    * @param {number} number - The number to validate.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validatePhoneNumber(number) {
-    return this.phoneNrValidator.validatePhoneNumber(number);
+  validatePhoneNumber (number) {
+    return this.phoneNrValidator.validatePhoneNumber(number)
   }
 
   /**
@@ -80,8 +79,8 @@ export class Validator {
    *
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validateCheckbox() {
-    return this.domFormValidator.checkBoxChecker();
+  validateCheckbox () {
+    return this.domFormValidator.checkBoxChecker()
   }
 
   /**
@@ -89,8 +88,8 @@ export class Validator {
    *
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validateRadio() {
-    return this.domFormValidator.radioButton();
+  validateRadio () {
+    return this.domFormValidator.radioButton()
   }
 
   /**
@@ -100,8 +99,8 @@ export class Validator {
    * @param {number} [minlength=8] The minimum length required for the password.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validatePassword(password, minlength = 8) {
-    return this.passwordValidator.validatePasswordRequirements(password, minlength);
+  validatePassword (password, minlength = 8) {
+    return this.passwordValidator.validatePasswordRequirements(password, minlength)
   }
 
   /**
@@ -110,8 +109,8 @@ export class Validator {
    * @param {string|number} personalNumber The personal number to validate.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validatePersonalNumber(personalNumber) {
-    return this.personalNumberValidator.validatePersonalNumber(personalNumber);
+  validatePersonalNumber (personalNumber) {
+    return this.personalNumberValidator.validatePersonalNumber(personalNumber)
   }
 
   /**
@@ -120,7 +119,7 @@ export class Validator {
    * @param {string} dateStr The date string to validate.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validateDate(dateStr) {
-    return this.DateValidator.validateDateString(dateStr);
+  validateDate (dateStr) {
+    return this.DateValidator.validateDateString(dateStr)
   }
 }
