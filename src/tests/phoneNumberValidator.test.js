@@ -3,43 +3,43 @@ import { PhoneNumberValidator } from '../validators/phoneNumberValidator.js'
 const validator = new PhoneNumberValidator()
 
 test('returns valid when phonenumber have correct length', () => {
-  const result = validator.validatePhoneNumber('070 123 4578')
+  const result = validator.validateSwedishPhoneNumber('070 123 4578')
   expect(result.valid).toBe(true)
   expect(result.message).toBe('✅ Valid number entered')
 })
 
 test('returns valid when phonenumber have correct length', () => {
-  const result = validator.validatePhoneNumber('0701234578')
+  const result = validator.validateSwedishPhoneNumber('0701234578')
   expect(result.valid).toBe(true)
   expect(result.message).toBe('✅ Valid number entered')
 })
 
 test('returns valid when phonenumber have correct length', () => {
-  const result = validator.validatePhoneNumber('46701234578')
+  const result = validator.validateSwedishPhoneNumber('46701234578')
   expect(result.valid).toBe(true)
   expect(result.message).toBe('✅ Valid number entered')
 })
 
 test('returns valid when phonenumber have correct length', () => {
-  const result = validator.validatePhoneNumber('070-1234578')
+  const result = validator.validateSwedishPhoneNumber('070-1234578')
   expect(result.valid).toBe(true)
   expect(result.message).toBe('✅ Valid number entered')
 })
 
 test('returns false when phonenumber is not a swedish number', () => {
-  const result = validator.validatePhoneNumber('47701234578')
+  const result = validator.validateSwedishPhoneNumber('47701234578')
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Invalid number entered')
 })
 
 test('returns false when phonenumber doesnt have correct length', () => {
-  const result = validator.validatePhoneNumber('112')
+  const result = validator.validateSwedishPhoneNumber('112')
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ Invalid number entered')
 })
 
 test('returns false when phonenumber doesnt have correct length', () => {
-  const result = validator.validatePhoneNumber()
+  const result = validator.validateSwedishPhoneNumber()
   expect(result.valid).toBe(false)
   expect(result.message).toBe('❌ No number entered')
 })
@@ -50,7 +50,7 @@ test('returns false when phonenumber is not a string', () => {
    *
    * @returns {void}
    */
-  const test = () => { return validator.validatePhoneNumber(55) }
+  const test = () => { return validator.validateSwedishPhoneNumber(55) }
   expect(test).toThrow(TypeError)
   expect(test).toThrow('Must be a string')
 })

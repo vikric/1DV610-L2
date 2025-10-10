@@ -1,5 +1,5 @@
 import {
-  validateStringType,
+  checkIsString,
   createInvalidMessage,
   createValidMessage,
 } from "../middleWare/middleWare.js";
@@ -14,15 +14,15 @@ export class DateValidator {
    * @param {string} dateStr - The date string to validate.
    * @returns {object} The result object indicating if the date is valid and a message.
    */
-  validateDate(dateStr) {
+  validateDateString(dateStr) {
     if (!dateStr) {
       return createInvalidMessage("No date provided");
     }
-    validateStringType(dateStr);
+    checkIsString(dateStr);
 
     const dateObj = this.#regexTester(dateStr);
 
-    dateObj.year = this.#centuryChecker(dateObj.year);
+    dateObj.year = this.#ensureFullYear(dateObj.year);
     const date = new Date(dateObj.year, dateObj.month - 1, dateObj.day);
 
     const valid =
@@ -61,7 +61,7 @@ export class DateValidator {
    * @param {number} year - The year number to test
    * @returns {year} Returns number with 4 digits.
    */
-  #centuryChecker(year) {
+  #ensureFullYear(year) {
     if (year < 1000) {
       year = +2000;
     }

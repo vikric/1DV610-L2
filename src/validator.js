@@ -5,7 +5,7 @@ import { PersonalNumberValidator } from "./validators/personalNumberValidator.js
 import { PasswordValidator } from "./validators/passwordValidator.js";
 import { DOMFormValidator } from "./validators/DOMFormValidator.js";
 import { DateValidator } from "./validators/dateValidator.js";
-import { validateStringType } from "./middleWare/middleWare.js";
+import { checkIsString } from "./middleWare/middleWare.js";
 /**
  *
  */
@@ -62,7 +62,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateEmail(email) {
-    return this.emailValidator.validateEmail(email);
+    return this.emailValidator.validateEmailAddress(email);
   }
 
   /**
@@ -101,7 +101,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePassword(password, minlength = 8) {
-    return this.passwordValidator.validatePassword(password, minlength);
+    return this.passwordValidator.validatePasswordRequirements(password, minlength);
   }
 
   /**
@@ -121,6 +121,6 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateDate(dateStr) {
-    return this.DateValidator.validateDate(dateStr);
+    return this.DateValidator.validateDateString(dateStr);
   }
 }

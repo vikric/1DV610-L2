@@ -29,7 +29,7 @@ export function createInvalidMessage(message) {
  *
  * @param {any} input - The value to validate.
  */
-export function validateStringType(input) {
+export function checkIsString(input) {
   switch (typeof input) {
     case "string":
       break;

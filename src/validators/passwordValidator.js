@@ -1,8 +1,8 @@
 import {
-  validateStringType,
+  checkIsString,
   createInvalidMessage,
-  createValidMessage,
-} from "../middleWare/middleWare.js";
+  createValidMessage
+} from '../middleWare/middleWare.js'
 
 /**
  *
@@ -15,38 +15,40 @@ export class PasswordValidator {
    * @param {number} [minlength = 8] - The minimum required length for the password.
    * @returns {object} Result object indicating if the password is valid and a message.
    */
-  validatePassword(password, minlength = 8) {
+  validatePasswordRequirements (password, minlength = 8) {
     if (!password) {
-      return createInvalidMessage("Password was not provided");
+      return createInvalidMessage('Password was not provided')
     }
-    validateStringType(password);
+    checkIsString(password)
 
-    const validLength = password.length >= minlength;
-
-    if (validLength) {
-      return this.#requirementsChecker(password);
+    if (password.length <= minlength) {
+      return createInvalidMessage(
+        `Password must be at least ${minlength} characters long`
+      )
     }
-    return createInvalidMessage("Password doesnt meet the requirements");
+    return this.#checkPasswordRequirements(password)
   }
 
-  #requirementsChecker(password) {
-    const counter = {
-      upperCase: 0,
-      lowerCase: 0,
-      digits: 0,
-    };
+  /**
+   * Checks if the password contains at least 2 uppercase letters, 2 lowercase letters, and 2 digits.
+   *
+   * @param {string} password - The password string to check.
+   * @returns {object} Result object indicating if the password meets the character requirements.
+   */
+  #checkPasswordRequirements (password) {
+    const upperCaseMatches = password.match(/[A-Z]/g)
+    const lowerCaseMatches = password.match(/[a-z]/g)
+    const digitsMatches = password.match(/\d/g)
 
-    for (const char of password) {
-      counter.upperCase = password.match(/[A-Z]/g);
-      counter.lowerCase = password.match(/[a-z]/g);
-      counter.digits = password.match(/\d/g);
+    const hasEnoughUpperCase = upperCaseMatches.length >= 2
+    const hasEnoughLowerCase = lowerCaseMatches.length >= 2
+    const hasEnoughDigits = digitsMatches.length >= 2
 
-      if (
-        counter.upperCase.length > 1 &&
-        counter.lowerCase.length > 1 &&
-        counter.digits.length > 1
-      )
-        return createValidMessage("Password is valid");
+    if (hasEnoughUpperCase && hasEnoughLowerCase && hasEnoughDigits) {
+      return createValidMessage('Password is valid')
     }
+    return createInvalidMessage(
+      'Password must contain atleast 2 uppercase letters, 2 lowercase letters and 2 digits'
+    )
   }
 }

@@ -1,8 +1,8 @@
 import {
-  validateStringType,
+  checkIsString,
   createInvalidMessage,
-  createValidMessage,
-} from "../middleWare/middleWare.js";
+  createValidMessage
+} from '../middleWare/middleWare.js'
 
 /**
  *
@@ -14,18 +14,18 @@ export class PhoneNumberValidator {
    * @param {string} phoneNumber - The phone number to validate.
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
-  validatePhoneNumber(phoneNumber) {
+  validateSwedishPhoneNumber (phoneNumber) {
     if (!phoneNumber || phoneNumber.length < 1) {
-      return createInvalidMessage("No number entered");
+      return createInvalidMessage('No number entered')
     }
-    validateStringType(phoneNumber);
+    checkIsString(phoneNumber)
 
-    const digitsOnly = this.#digitChecker(phoneNumber);
-    if (!digitsOnly) return createInvalidMessage("Invalid length on number");
+    const digitsOnly = this.#digitChecker(phoneNumber)
+    if (!digitsOnly) return createInvalidMessage('Invalid length on number')
 
-    const valid = this.#sweDigitsChecker(digitsOnly);
+    const valid = this.#sweDigitsChecker(digitsOnly)
 
-    return this.#validChecker(valid);
+    return this.#validChecker(valid)
   }
 
   /**
@@ -34,28 +34,34 @@ export class PhoneNumberValidator {
    * @param {string} phoneNumber - The phone number to check.
    * @returns {string} A string with only digits.
    */
-  #digitChecker(phoneNumber) {
+  #digitChecker (phoneNumber) {
     // /\D/g Removes any non digit
-    return phoneNumber.replaceAll(/\D/g, "");
+    return phoneNumber.replaceAll(/\D/g, '')
   }
 
   /**
    * Check if start digits are for swedish cellularphones.
    *
    * @param {string} digits - The digits to check.
-   * @returns {Boolean}
+   * @returns {boolean} True if the digits match Swedish cellular phone number format, otherwise false.
    */
-  #sweDigitsChecker(digits) {
-    const startDigits = digits.toString().substring(0, 2);
+  #sweDigitsChecker (digits) {
+    const startDigits = digits.toString().substring(0, 2)
     const valid =
-      (startDigits === "46" && digits.length === 11) ||
-      (startDigits === "07" && digits.length === 10);
-    return valid;
+      (startDigits === '46' && digits.length === 11) ||
+      (startDigits === '07' && digits.length === 10)
+    return valid
   }
 
-  #validChecker(valid) {
+  /**
+   * Returns a validation message based on the validity of the phone number.
+   *
+   * @param {boolean} valid - Indicates if the phone number is valid.
+   * @returns {{ valid: boolean, message: string }} Validation result object with validity and message.
+   */
+  #validChecker (valid) {
     return valid
-      ? createValidMessage("Valid number entered")
-      : createInvalidMessage("Invalid number entered");
+      ? createValidMessage('Valid number entered')
+      : createInvalidMessage('Invalid number entered')
   }
 }

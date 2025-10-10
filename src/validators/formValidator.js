@@ -1,5 +1,5 @@
 import {
-  validateStringType,
+  checkIsString,
   createValidMessage,
   createInvalidMessage,
 } from "../middleWare/middleWare.js";
@@ -18,7 +18,7 @@ export class FormValidator {
     if (!input) {
       return createInvalidMessage("Input is empty");
     }
-    validateStringType(input);
+    checkIsString(input);
     const valid = input.trim().length > 0;
     return valid
       ? createValidMessage("Input is not empty")
