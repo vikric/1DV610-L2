@@ -1,5 +1,6 @@
 # Validation Module
 
+School project for Linnúniversity
 
 ## Description
 A module for validating multiple inputs.
