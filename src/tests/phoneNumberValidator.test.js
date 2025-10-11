@@ -1,4 +1,4 @@
-import { PhoneNumberValidator } from '../validators/phoneNumberValidator.js'
+import { PhoneNumberValidator } from '../js/validators/phoneNumberValidator.js'
 
 const validator = new PhoneNumberValidator()
 

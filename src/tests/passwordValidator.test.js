@@ -1,4 +1,4 @@
-import { PasswordValidator } from '../validators/passwordValidator'
+import { PasswordValidator } from '../js/validators/passwordValidator'
 
 const validator = new PasswordValidator()
 
