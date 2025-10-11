@@ -21,7 +21,7 @@ export class PasswordValidator {
     }
     checkIsString(password)
 
-    if (password.length <= minlength) {
+    if (password.length < minlength) {
       return createInvalidMessage(
         `Password must be at least ${minlength} characters long`
       )
@@ -36,13 +36,14 @@ export class PasswordValidator {
    * @returns {object} Result object indicating if the password meets the character requirements.
    */
   #checkPasswordRequirements (password) {
-    const upperCaseMatches = password.match(/[A-Z]/g)
-    const lowerCaseMatches = password.match(/[a-z]/g)
-    const digitsMatches = password.match(/\d/g)
+    const upperCaseMatches = password.match(/[A-Z]/g) || 0
+    const lowerCaseMatches = password.match(/[a-z]/g) || 0
+    const digitsMatches = password.match(/\d/g) || 0
 
     const hasEnoughUpperCase = upperCaseMatches.length >= 2
     const hasEnoughLowerCase = lowerCaseMatches.length >= 2
     const hasEnoughDigits = digitsMatches.length >= 2
+
 
     if (hasEnoughUpperCase && hasEnoughLowerCase && hasEnoughDigits) {
       return createValidMessage('Password is valid')

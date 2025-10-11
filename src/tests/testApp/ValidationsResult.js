@@ -1,4 +1,4 @@
-import { Validator } from '../../validator.js'
+import { Validator } from '../../js/index.js'
 const validator = new Validator()
 
 const correctFormatNumber = validator.validatePhoneNumber('070 123 45 78')

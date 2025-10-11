@@ -9,18 +9,26 @@ import { DateValidator } from './validators/dateValidator.js'
  *
  */
 export class Validator {
+
+  #dateValidator
+  #formValidator
+  #emailValidator
+  #phoneNrValidator
+  #personalNumberValidator
+  #passwordValidator
+  #domFormValidator
   /**
    * Initializes the Validator with form, email, and phone number validators.
    *
    */
   constructor () {
-    this.DateValidator = new DateValidator()
-    this.formValidator = new FormValidator()
-    this.emailValidator = new EmailValidator()
-    this.phoneNrValidator = new PhoneNumberValidator()
-    this.personalNumberValidator = new PersonalNumberValidator()
-    this.passwordValidator = new PasswordValidator()
-    this.domFormValidator = new DOMFormValidator()
+    this.#dateValidator = new DateValidator()
+    this.#formValidator = new FormValidator()
+    this.#emailValidator = new EmailValidator()
+    this.#phoneNrValidator = new PhoneNumberValidator()
+    this.#personalNumberValidator = new PersonalNumberValidator()
+    this.#passwordValidator = new PasswordValidator()
+    this.#domFormValidator = new DOMFormValidator()
   }
 
   /**
@@ -37,14 +45,14 @@ export class Validator {
       case 'password':
       case 'time':
       case 'url':
-        return this.formValidator.isNotEmpty(input)
+        return this.#formValidator.isNotEmpty(input)
 
       case 'email':
         return this.validateEmail(input)
 
       case 'number':
       case 'tel':
-        return this.validatePhoneNumber(input)
+        return this.validateSwedishPhoneNumber(input)
 
       case 'checkbox':
         return this.validateCheckbox()
@@ -61,7 +69,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateEmail (email) {
-    return this.emailValidator.validateEmailAddress(email)
+    return this.#emailValidator.validateEmailAddress(email)
   }
 
   /**
@@ -71,7 +79,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePhoneNumber (number) {
-    return this.phoneNrValidator.validatePhoneNumber(number)
+    return this.#phoneNrValidator.validateSwedishPhoneNumber(number)
   }
 
   /**
@@ -80,7 +88,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateCheckbox () {
-    return this.domFormValidator.checkBoxChecker()
+    return this.#domFormValidator.checkBoxChecker()
   }
 
   /**
@@ -89,7 +97,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateRadio () {
-    return this.domFormValidator.radioButton()
+    return this.#domFormValidator.radioButton()
   }
 
   /**
@@ -100,7 +108,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePassword (password, minlength = 8) {
-    return this.passwordValidator.validatePasswordRequirements(password, minlength)
+    return this.#passwordValidator.validatePasswordRequirements(password, minlength)
   }
 
   /**
@@ -110,7 +118,7 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validatePersonalNumber (personalNumber) {
-    return this.personalNumberValidator.validatePersonalNumber(personalNumber)
+    return this.#personalNumberValidator.validateSwedishPersonalNumber(personalNumber)
   }
 
   /**
@@ -120,6 +128,6 @@ export class Validator {
    * @returns {{ valid: boolean, message: string }} Result of validation with validity and message.
    */
   validateDate (dateStr) {
-    return this.DateValidator.validateDateString(dateStr)
+    return this.#dateValidator.validateDateString(dateStr)
   }
 }
