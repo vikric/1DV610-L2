@@ -29,15 +29,11 @@ A module for validating formats of multiple inputs.
 ## Installation Guide
 
  ```
- git clone https://github.com/vikric/1DV610-L2.git
+ npm install validator-sv
  ```
-```
-cd 1DV610-L2
-```
 
-``` 
-npm install
-```
+
+
 
 ## How it works
 
