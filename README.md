@@ -3,7 +3,7 @@
 School project for Linnúniversity
 
 ## Description
-A module for validating multiple inputs.
+A module for validating formats of multiple inputs.
 
 - Dates
 - Emailaddresses
