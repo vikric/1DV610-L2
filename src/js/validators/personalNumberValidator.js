@@ -19,7 +19,7 @@ export class PersonalNumberValidator {
     }
     checkIsString(personalNumber)
 
-    const shortedPersonalNumber = this.trimCentury(personalNumber)
+    const shortedPersonalNumber = this.#trimCentury(personalNumber)
 
     if (!shortedPersonalNumber) {
       return createInvalidMessage('Invalid length of personal number')
@@ -42,7 +42,7 @@ export class PersonalNumberValidator {
    * @param {string} personalNumber - The personal number to be validated and possibly trimmed.
    * @returns {(string|boolean)} Returns the trimmed personal number if valid, otherwise false.
    */
-  trimCentury (personalNumber) {
+  #trimCentury (personalNumber) {
     if (personalNumber.length === 12) {
       personalNumber = personalNumber.substring(2)
     }

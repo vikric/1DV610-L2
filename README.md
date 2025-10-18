@@ -13,17 +13,18 @@ A module for validating formats of multiple inputs.
 - There is also a form validator & DomForm validator so you can validate HTML element inputs.
 ---
   ```js
-  import { Validator } from "../../validator.js";
-  const validator = new Validator();
+import { Validator } from 'validator-sv'
+const validator = new Validator()
 
-  const correctFormatNumber = validator.validatePhoneNumber("070 123 45 78");
-  console.log(correctFormatNumber);
+const correctFormatNumber = validator.validatePhoneNumber('070 123 45 78')
+console.log(correctFormatNumber)
 
-  const incorrectFormatNumber = validator.validatePhoneNumber("70 123 45 78");
-  console.log(incorrectFormatNumber);
+const incorrectFormatNumber = validator.validatePhoneNumber('70 123 45 78')
+console.log(incorrectFormatNumber)
 
   ```
 ![alt text](https://raw.githubusercontent.com/vikric/1DV610-L2/V1.1/src/images/console.logs.png)
+
 
 
 ## Installation Guide
